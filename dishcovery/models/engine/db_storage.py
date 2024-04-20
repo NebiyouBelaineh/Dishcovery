@@ -20,17 +20,17 @@ class DBStorage:
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
-        HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
-        HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
-        HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
-        HBNB_ENV = getenv('HBNB_ENV')
+        DISHCOVERY_MYSQL_USER = getenv('DISHCOVERY_MYSQL_USER')
+        DISHCOVERY_MYSQL_PWD = getenv('DISHCOVERY_MYSQL_PWD')
+        DISHCOVERY_MYSQL_HOST = getenv('DISHCOVERY_MYSQL_HOST')
+        DISHCOVERY_MYSQL_DB = getenv('DISHCOVERY_MYSQL_DB')
+        DISHCOVERY_ENV = getenv('DISHCOVERY_ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(HBNB_MYSQL_USER,
-                                             HBNB_MYSQL_PWD,
-                                             HBNB_MYSQL_HOST,
-                                             HBNB_MYSQL_DB))
-        if HBNB_ENV == "test":
+                                      format(DISHCOVERY_MYSQL_USER,
+                                             DISHCOVERY_MYSQL_PWD,
+                                             DISHCOVERY_MYSQL_HOST,
+                                             DISHCOVERY_MYSQL_DB))
+        if DISHCOVERY_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
@@ -68,32 +68,32 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self, cls, id):
-        """
-        Returns the object based on the class name and its ID, or
-        None if not found
-        """
-        if cls not in classes.values():
-            return None
+    # def get(self, cls, id):
+    #     """
+    #     Returns the object based on the class name and its ID, or
+    #     None if not found
+    #     """
+    #     if cls not in classes.values():
+    #         return None
 
-        all_cls = models.storage.all(cls)
-        for value in all_cls.values():
-            if (value.id == id):
-                return value
+    #     all_cls = models.storage.all(cls)
+    #     for value in all_cls.values():
+    #         if (value.id == id):
+    #             return value
 
-        return None
+    #     return None
 
-    def count(self, cls=None):
-        """
-        count the number of objects in storage
-        """
-        all_class = classes.values()
+    # def count(self, cls=None):
+    #     """
+    #     count the number of objects in storage
+    #     """
+    #     all_class = classes.values()
 
-        if not cls:
-            count = 0
-            for clas in all_class:
-                count += len(models.storage.all(clas).values())
-        else:
-            count = len(models.storage.all(cls).values())
+    #     if not cls:
+    #         count = 0
+    #         for clas in all_class:
+    #             count += len(models.storage.all(clas).values())
+    #     else:
+    #         count = len(models.storage.all(cls).values())
 
-        return count
+    #     return count
