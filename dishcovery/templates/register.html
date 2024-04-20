@@ -12,29 +12,29 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="styles/common.css" />
-    <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/footer.css" />
-    <link rel="stylesheet" href="styles/login_register.css" />
+    <link rel="stylesheet" href="../static/styles/common.css" />
+    <link rel="stylesheet" href="../static/styles/header.css" />
+    <link rel="stylesheet" href="../static/styles/footer.css" />
+    <link rel="stylesheet" href="../static/styles/login_register.css" />
 
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="images/favicon/apple-touch-icon.png"
+      href="../static/images/favicon/apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="images/favicon/favicon-32x32.png"
+      href="../static/images/favicon/favicon-32x32.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="images/favicon/favicon-16x16.png"
+      href="../static/images/favicon/favicon-16x16.png"
     />
-    <link rel="manifest" href="images/favicon/site.webmanifest" />
+    <link rel="manifest" href="../static/images/favicon/site.webmanifest" />
 
     <title>Login</title>
   </head>
@@ -56,8 +56,10 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link" href="#">Home</a>
-            <a class="nav-item nav-link active" href="/web_static/login.html">Login</a>
-            <a class="nav-item nav-link" href="/web_static/register.html">Register</a>
+            <a class="nav-item nav-link" href="./login.html"
+              >Login</a
+            >
+            <a class="nav-item nav-link active" href="./register.html">Register</a>
             <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
           </div>
         </div>
@@ -67,7 +69,7 @@
       <form>
         <img
           class="mb-4 main-logo"
-          src="images/DishCovery_logo_light_1.png"
+          src="../static/images/DishCovery_logo_light_1.png"
           alt="Dishcovery"
           width="300px"
         />
@@ -91,14 +93,18 @@
           />
           <label for="floatingPassword">Password</label>
         </div>
-
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Remember me
-          </label>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Confirm Password"
+          />
+          <label for="floatingPassword">Confirm Password</label>
         </div>
-        <button class="w-100 btn btn-lg btn-secondary" type="submit">
-          Sign in
+
+        <button class="w-100 btn btn-lg btn-secondary custom-register" type="submit">
+          Register
         </button>
       </form>
     </main>
