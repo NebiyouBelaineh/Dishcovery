@@ -3,7 +3,7 @@
 initialize the models package
 """
 
-from models.engine.db_storage import DBStorage
+from dishcovery.models.engine.db_storage import DBStorage
 from os import getenv
 
 
