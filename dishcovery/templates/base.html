@@ -58,7 +58,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Home</a>
+            <a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %} " href="{{ url_for('home_route') }}">Home</a>
             <a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %} " href="{{ url_for('login_route') }}"
               >Login</a
             >
