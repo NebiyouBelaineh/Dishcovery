@@ -59,10 +59,10 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link" href="#">Home</a>
-            <a class="nav-item nav-link" href="{{ url_for('login_route') }}"
+            <a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %} " href="{{ url_for('login_route') }}"
               >Login</a
             >
-            <a class="nav-item nav-link active" href="{{ url_for('register_route') }}">Register</a>
+            <a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}" href="{{ url_for('register_route') }}">Register</a>
             <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
           </div>
         </div>
