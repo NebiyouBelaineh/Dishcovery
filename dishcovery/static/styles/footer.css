@@ -1,14 +1,22 @@
 footer {
-
     /* background-color: white;  */
     height: 60px; 
     position: absolute;
     width: 100%;
     border-top: 1px solid #CCCCCC;  
+    
     display:flex; 
     flex-direction: column; 
     justify-content: center; 
     align-items: center;
+    
+    color:white;
+    z-index: 1000px;
+}
+.login_footer {
     bottom: 0;
-    color:white ;    
+}
+.home_footer {
+    margin-left: 0;
+    justify-content: end;
 }
