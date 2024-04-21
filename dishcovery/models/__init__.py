@@ -4,8 +4,11 @@ initialize the models package
 """
 
 from dishcovery.models.engine.db_storage import DBStorage
-from os import getenv
 
+# Initialize DBStorage object and create tables
+db_storage = DBStorage()
 
-storage = DBStorage()
-storage.reload()
+# Import model classes after initializing tables
+from dishcovery.models.user import User
+from dishcovery.models.recipe import Recipe
+from dishcovery.models.bookmark import Bookmark

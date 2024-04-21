@@ -3,14 +3,14 @@
 Contains the class DBStorage
 """
 
-import models
-from os import getenv
-import sqlalchemy
-from models.base_model import BaseModel, Base
+from os import environ
+from dishcovery.models.base_model import BaseModel, Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from dotenv import load_dotenv
 
 classes = {}
+load_dotenv()
 
 
 class DBStorage:
@@ -20,18 +20,18 @@ class DBStorage:
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        DISHCOVERY_MYSQL_USER = getenv('DISHCOVERY_MYSQL_USER')
-        DISHCOVERY_MYSQL_PWD = getenv('DISHCOVERY_MYSQL_PWD')
-        DISHCOVERY_MYSQL_HOST = getenv('DISHCOVERY_MYSQL_HOST')
-        DISHCOVERY_MYSQL_DB = getenv('DISHCOVERY_MYSQL_DB')
-        DISHCOVERY_ENV = getenv('DISHCOVERY_ENV')
+        DISHCOVERY_MYSQL_USER = environ.get('DISHCOVERY_MYSQL_USER')
+        DISHCOVERY_MYSQL_PWD = environ.get('DISHCOVERY_MYSQL_PWD')
+        DISHCOVERY_MYSQL_HOST = environ.get('DISHCOVERY_MYSQL_HOST')
+        DISHCOVERY_MYSQL_DB = environ.get('DISHCOVERY_MYSQL_DB')
+        DISHCOVERY_ENV = environ.get('DISHCOVERY_ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                       format(DISHCOVERY_MYSQL_USER,
                                              DISHCOVERY_MYSQL_PWD,
                                              DISHCOVERY_MYSQL_HOST,
                                              DISHCOVERY_MYSQL_DB))
         if DISHCOVERY_ENV == "test":
-            Base.metadata.drop_all(self.__engine)
+            BaseModel.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """query on the current database session"""
