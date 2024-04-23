@@ -12,10 +12,10 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    
     <link rel="stylesheet" href="../static/styles/common.css" />
     <link rel="stylesheet" href="../static/styles/header.css" />
     <link rel="stylesheet" href="../static/styles/footer.css" />
-    <link rel="stylesheet" href="../static/styles/login_register.css" />
 
     <link
       rel="apple-touch-icon"
@@ -35,6 +35,12 @@
       href="../static/images/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="../static/images/favicon/site.webmanifest" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
+    {% block styles%}
+    {% endblock%}
+    {% block script%}
+    {% endblock%}
 
     <title>
 		{% block title %}
@@ -59,20 +65,22 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %} " href="{{ url_for('home_route') }}">Home</a>
-            <a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %} " href="{{ url_for('login_route') }}"
-              >Login</a
+            <a class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %} " href="{{ url_for('recipe_finder') }}"
+              >Recipe Finder</a
             >
-            <a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}" href="{{ url_for('register_route') }}">Register</a>
+            <a class="nav-item nav-link {% if request.path == url_for('bookmark_route') %}active{% endif %} " href="{{ url_for('bookmark_route') }}">Bookmarks</a>
+            <a class="nav-item nav-link {% if request.path == url_for('settings_route') %}active{% endif %} " href="{{ url_for('settings_route') }}"
+              >Settings</a
+            >
+            <a class="nav-item nav-link {% if request.path == url_for('logout_route') %}active{% endif %}" href="{{ url_for('logout_route') }}">Logout</a>
             <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
           </div>
         </div>
       </nav>
     </header>
-    <main class="form-signin">
-     {% block main %}
-	 {% endblock %}
-    </main>
-    <footer class="bg-success login_footer">
+    {% block main %}
+	{% endblock %}
+    <footer class="bg-success inner_footer">
       <p class="mt-5 mb-3 fs-5 font-weight-bold">&copy;DishCovery 2024</p>
     </footer>
     <script

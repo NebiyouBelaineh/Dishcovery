@@ -1,51 +1,51 @@
-{% extends 'base.html' %}
+{% extends 'base_1.html' %} {% block title %} Register {% endblock %} {% block
+main %}
+<div class="container">
+  <main class="form-signin">
+    <form>
+      <img
+        class="mb-4 main-logo"
+        src="../static/images/DishCovery_logo_light_1.png"
+        alt="Dishcovery"
+        width="300px"
+      />
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-
-{% block title %}
-register
-{% endblock %}
-
-{% block main %}
-      <form>
-        <img
-          class="mb-4 main-logo"
-          src="../static/images/DishCovery_logo_light_1.png"
-          alt="Dishcovery"
-          width="300px"
+      <div class="form-floating">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
         />
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+        />
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Confirm Password"
+        />
+        <label for="floatingPassword">Confirm Password</label>
+      </div>
 
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-          />
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-          />
-          <label for="floatingPassword">Password</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Confirm Password"
-          />
-          <label for="floatingPassword">Confirm Password</label>
-        </div>
-
-        <button class="w-100 btn btn-lg btn-secondary custom-register" type="submit">
-          Register
-        </button>
-      </form>
-    {% endblock %}
-	
+      <button
+        class="w-100 btn btn-lg btn-secondary custom-register"
+        type="submit"
+      >
+        Register
+      </button>
+    </form>
+  </main>
+</div>
+{% endblock %}

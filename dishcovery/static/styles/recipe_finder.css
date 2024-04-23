@@ -1,0 +1,29 @@
+div main.recipe_finder {
+    height: inherit;
+
+}
+.recipe_finder_container {
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+.par_container {
+    background-color: #88AB8E;
+    border-radius: 10px;
+    color: white;
+}
+.recipe_button {
+    display: flex;
+    justify-content: center;
+}
+button.btn-add {
+    margin-left: 10px;
+}
+.recipe_button {
+    margin-top: 50px;
+}
+.recipe_form {
+    margin-bottom: 50px;
+}
+footer.inner_footer {
+    bottom: unset;
+}

@@ -1,0 +1,82 @@
+{% extends 'base_2.html' %} {% block script %}
+<script src="../static/scripts/makeSuggestion.js"></script>
+{% endblock %} {% block title %} Recipe Finder {% endblock %} {% block styles%}
+<link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
+<link rel="stylesheet" href="../static/styles/recipe_finder.css" />
+
+{% endblock%} {% block main %}
+
+<div class="container recipe_finder_container">
+  <main class="recipe_finder">
+    <div class="main-logo">
+      <img
+        class="mb-4 main-logo"
+        src="../static/images/DishCovery_logo_light_1.png"
+        alt="Dishcovery"
+        width="500px"
+      />
+      <h3>Hello <span class="badge bg-warning">User</span></h3>
+      <p class="lead">
+        Type in or choose the ingridents you would like to use for your next
+        dish.
+      </p>
+    </div>
+    <div class="par_container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <br>
+          <h4><span class="badge rounded-pill bg-secondary">Ingridents and Restriction selection</span></h4>
+          <br>
+          <form class="needs-validation recipe_form" novalidate>
+            <div class="row">
+              <div class="col-12 ingredientContainer">
+                <label for="email" class="form-label">Add ingridents using the <span class="badge rounded-pill bg-secondary">Add</span> button</label>
+                <div class="input-group">
+                  <input
+                  type="text"
+                  list="suggestions"
+                  class="form-control"
+                  id="ingridents"
+                  placeholder="Eggs, Tomato, Cheese, ..."
+                  required
+                />
+                <button id="addIngredientButton" class="btn btn-secondary rounded-pill" style="margin-left: 10px" type="button">Add</button>
+                <datalist id="suggestions">
+                </datalist>
+                </div>                  
+                  
+              <hr class="my-4" />
+              <label for="email" class="form-label">Cuisine Type - <span class="badge rounded-pill bg-secondary">Style of cooking</span></label>
+                <select class="form-select">
+                {% for cuisine in cuisines%}
+                <option value="{{ cuisine }}">{{ cuisine }}</option>
+                {% endfor %}
+              </select>
+ 
+            <hr class="my-4" />
+            <label for="email" class="form-label">Meal Type<span class="badge rounded-pill bg-secondary"></span></label>
+                <select class="form-select">
+                {% for meal in meals%}
+                <option value="{{ meal }}">{{ meal }}</option>
+                {% endfor %}
+              </select>
+              <hr class="my-4" />
+              <label for="email" class="form-label">Dish Type<span class="badge rounded-pill bg-secondary"></span></label>
+                <select class="form-select">
+                {% for dish in dishes%}
+                <option value="{{ dish }}">{{ dish }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+  </main>
+</div>
+<div class="d-grid recipe_button">
+  <button class="btn btn-secondary btn-lg" type="submit">
+    Find Recipe
+  </button>
+</div>
+
+{% endblock %}
