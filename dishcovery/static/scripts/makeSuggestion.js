@@ -19,6 +19,7 @@ $(function () {
             return response.json();
         })
         .then(data => {
+            console.log('Data loaded successfully')
             suggestions = data;
             inputField.addEventListener("input", makeSuggestion);
         })

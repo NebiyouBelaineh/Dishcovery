@@ -1,29 +1,47 @@
+body {
+  background-color: unset;
+}
 div main.recipe_finder {
-    height: inherit;
-
+  height: inherit;
 }
 .recipe_finder_container {
-    margin-top: 70px;
-    margin-bottom: 70px;
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 .par_container {
-    background-color: #88AB8E;
-    border-radius: 10px;
-    color: white;
+  background-color: #88ab8e;
+  border-radius: 10px;
+  color: white;
 }
 .recipe_button {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 button.btn-add {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .recipe_button {
-    margin-top: 50px;
+  margin-top: 50px;
+  margin-bottom: 40px;
 }
 .recipe_form {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 footer.inner_footer {
-    bottom: unset;
+  bottom: unset;
+}
+.main-logo h1 {
+  font-family: cursive;
+  font-size: 70px;
+  font-weight: 600;
+  background-image: linear-gradient(to left, #fff2f2, #689e3c);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.recipe_finder_container {
+    padding: 0 100px;
+}
+span.selected-ingridents {
+    padding-right: 4px;
 }
