@@ -1,10 +1,10 @@
 $(function () {
-  $(document).keypress(function (event) {
+  $(document).keypress(function (event) {// Disable enter/return key
     if (event.which == "13") {
       event.preventDefault();
     }
   });
-  const inputField = document.getElementById("ingridents");
+  const inputField = document.getElementById("ingredients");
   const dataList = document.getElementById("suggestions");
   
   const filename = "/static/data/food_list.json";

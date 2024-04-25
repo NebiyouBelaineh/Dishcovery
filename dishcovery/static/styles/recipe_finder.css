@@ -12,6 +12,9 @@ div main.recipe_finder {
   background-color: #88ab8e;
   border-radius: 10px;
   color: white;
+
+  width: 80%;
+  margin: auto;
 }
 .recipe_button {
   display: flex;
@@ -40,12 +43,12 @@ footer.inner_footer {
   -webkit-background-clip: text;
 }
 .recipe_finder_container {
-    padding: 0 100px;
+  padding: 0 100px;
 }
-div.selectedIngridents {
+div.selectedIngredients {
   display: inline;
   margin-right: 10px;
 }
-p.ingridentText {
+p.ingredientText {
   display: inline;
 }

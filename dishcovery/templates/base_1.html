@@ -36,15 +36,14 @@
     />
     <link rel="manifest" href="../static/images/favicon/site.webmanifest" />
 
-    <title>
-		{% block title %}
-		{% endblock %}
-	</title>
+    <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
-    <header>
+    <header class="shadow">
       <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand mb-0 h1 logo" href="{{ url_for('home_route') }}"><h1>DishCovery</h1></a>
+        <a class="navbar-brand mb-0 h1 logo" href="{{ url_for('home_route') }}"
+          ><h1>DishCovery</h1></a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -56,21 +55,33 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNavAltMarkup"
+        >
           <div class="navbar-nav">
-            <a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %} " href="{{ url_for('home_route') }}">Home</a>
-            <a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %} " href="{{ url_for('login_route') }}"
+            <a
+              class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
+              href="{{ url_for('home_route') }}"
+              >Home</a
+            >
+            <a
+              class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %}"
+              href="{{ url_for('login_route') }}"
               >Login</a
             >
-            <a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}" href="{{ url_for('register_route') }}">Register</a>
+            <a
+              class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}"
+              href="{{ url_for('register_route') }}"
+              >Register</a
+            >
             <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
           </div>
         </div>
       </nav>
     </header>
-    
-   {% block main %}
-	 {% endblock %}
+
+    {% block main %} {% endblock %}
     <footer class="login_footer">
       <p class="mt-5 mb-3 fs-5 font-weight-bold">&copy;DishCovery 2024</p>
     </footer>
