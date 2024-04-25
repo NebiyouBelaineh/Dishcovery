@@ -42,6 +42,10 @@ footer.inner_footer {
 .recipe_finder_container {
     padding: 0 100px;
 }
-span.selected-ingridents {
-    padding-right: 4px;
+div.selectedIngridents {
+  display: inline;
+  margin-right: 10px;
+}
+p.ingridentText {
+  display: inline;
 }

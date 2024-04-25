@@ -2,6 +2,7 @@
 
 <script src="../static/scripts/addIngridents.js"></script>
 <script src="../static/scripts/makeSuggestion.js"></script>
+<script src="../static/scripts/collectRecipeDetails.js"></script>
 {% endblock %} {% block title %} Recipe Finder {% endblock %} {% block styles%}
 <link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
 <link rel="stylesheet" href="../static/styles/recipe_finder.css" />
@@ -46,34 +47,40 @@
               </div>             
                   
               <hr class="my-4" />
-              <label for="email" class="form-label">Cuisine Type - <span class="badge rounded-pill bg-secondary">Style of cooking</span></label>
-                <select class="form-select">
+              <div class="col-12">
+              <label for="cusines" class="form-label">Cuisine Type - <span class="badge rounded-pill bg-secondary">Style of cooking</span></label>
+                <select id="cusines" class="form-select">
                 {% for cuisine in cuisines%}
                 <option value="{{ cuisine }}">{{ cuisine }}</option>
                 {% endfor %}
               </select>
+            </div>
  
             <hr class="my-4" />
-            <label for="email" class="form-label">Meal Type<span class="badge rounded-pill bg-secondary"></span></label>
-                <select class="form-select">
+            <div class="col-12">
+            <label for="meals" class="form-label">Meal Type<span class="badge rounded-pill bg-secondary"></span></label>
+                <select id="meals" class="form-select">
                 {% for meal in meals%}
                 <option value="{{ meal }}">{{ meal }}</option>
                 {% endfor %}
               </select>
+            </div>
               <hr class="my-4" />
-              <label for="email" class="form-label">Dish Type<span class="badge rounded-pill bg-secondary"></span></label>
-                <select class="form-select">
+              <div class="col-12">
+              <label for="dishes" class="form-label">Dish Type<span class="badge rounded-pill bg-secondary"></span></label>
+                <select id="dishes" class="form-select">
                 {% for dish in dishes%}
                 <option value="{{ dish }}">{{ dish }}</option>
                 {% endfor %}
               </select>
+            </div>
             </div>
           </form>
         </div>
       </div>
   </main>
   <div class="d-grid gap-2 col-6 mx-auto recipe_button ">
-    <button class="btn btn-secondary btn-lg" type="submit">
+    <button id="sumbitRecipeButton" class="btn btn-secondary btn-lg" type="submit">
       Find Recipe
     </button>
   </div>
