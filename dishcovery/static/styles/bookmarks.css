@@ -1,9 +1,11 @@
 body {
 	background-color: unset;
+	min-height:100vh;
   }
 .section-container {
 	padding-top: 120px;
 	padding-bottom: 70px;
+	min-height: 100vh;
 }
 
 .main {
@@ -47,7 +49,15 @@ body {
 }
 
 
-.col-custom{
-	display:flex;
-	justify-content: center;
+@media screen and (max-width: 575px){
+	.col-custom{
+		display:flex;
+		justify-content: center;
+	}
+	
+}
+@media screen and (min-width: 576px){
+	.col-custom{
+		display:flex;
+	}
 }

@@ -52,3 +52,8 @@ def settings_route():
 def logout_route():
     """ Logs out user and serves login page """
     return render_template('login.html')
+
+@app.route("/results", strict_slashes=False)
+def results_route():
+    """ Logs out user and serves login page """
+    return render_template('results.html')
