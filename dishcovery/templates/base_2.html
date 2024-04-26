@@ -43,55 +43,56 @@
   </head>
   <body>
     <header class="shadow">
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand mb-0 h1 logo" href="{{ url_for('home_route') }}"
-          ><h1>DishCovery</h1></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarNavAltMarkup"
-        >
-          <div class="navbar-nav">
-            <a
-              class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
-              href="{{ url_for('home_route') }}"
-              >Home</a
-            >
-            <a
+
+	  <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#" style="font-size: 37px; color:#fff;">DishCovery</a>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+			  <li class="nav-item">
+				<a
+		  class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
+		  href="{{ url_for('home_route') }} " style="color:#fff !important;"
+		  >Home</a
+		>
+			  </li>
+			  <li class="nav-item">
+				<a
               class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %}"
-              href="{{ url_for('recipe_finder') }}"
+              href="{{ url_for('recipe_finder') }}"  style="color:#fff !important;"
               >Recipe Finder</a
             >
-            <a
-              class="nav-item nav-link {% if request.path == url_for('bookmark_route') %}active{% endif %}"
-              href="{{ url_for('bookmark_route') }}"
-              >Bookmarks</a
-            >
-            <a
+			  </li>
+			  <li class="nav-item">
+				<a
+				class="nav-item nav-link {% if request.path == url_for('bookmark_route') %}active{% endif %}"
+				href="{{ url_for('bookmark_route') }}" style="color:#fff !important;"
+				>Bookmarks</a
+			  >
+			  </li>
+			  <li class="nav-item">
+				<a
               class="nav-item nav-link {% if request.path == url_for('settings_route') %}active{% endif %}"
-              href="{{ url_for('settings_route') }}"
+              href="{{ url_for('settings_route') }}" style="color:#fff !important;"
               >Settings</a
             >
-            <a
+			  </li>
+			  <li class="nav-item">
+				<a
               class="nav-item nav-link {% if request.path == url_for('logout_route') %}active{% endif %}"
-              href="{{ url_for('logout_route') }}"
+              href="{{ url_for('logout_route') }}" style="color:#fff !important;"
               >Logout</a
             >
-            <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
-          </div>
-        </div>
-      </nav>
+			  </li>
+			<!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+			</ul>
+			
+		  </div>
+		</div>
+	  </nav>
     </header>
     {% block main %} {% endblock %}
     <footer class="inner_footer">

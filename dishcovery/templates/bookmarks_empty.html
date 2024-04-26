@@ -1,0 +1,25 @@
+{% extends 'base_2.html' %} 
+{% block title %}
+ Recipe Finder 
+{% endblock %}
+
+{% block styles%}
+<link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
+<link rel="stylesheet" href="../static/styles/bookmarks.css" />
+{% endblock%}
+
+{% block script %}
+<script src="../static/scripts/bookmarks.js"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container section-container">
+  <main class="main container">
+    <p class="primary-text">Nothing here!</h1>
+	<p class="secondary-text">You haven't bookmarked any recipe so far.</p>
+	<p class="secondary-text">Start browsing to have your favorite recipes.</p>
+	<a href="/recipe_finder" class="action-btn">Start here</a>
+  </main>
+</div>
+
+{% endblock %}

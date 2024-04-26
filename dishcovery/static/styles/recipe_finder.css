@@ -43,7 +43,7 @@ footer.inner_footer {
   -webkit-background-clip: text;
 }
 .recipe_finder_container {
-  padding: 0 100px;
+  padding: 50px 50px 0px 0px;
 }
 div.selectedIngredients {
   display: inline;
@@ -51,4 +51,9 @@ div.selectedIngredients {
 }
 p.ingredientText {
   display: inline;
+}
+.navbar-dark,
+.navbar-toggler {
+    color: rgba(255,255,255,1) !important;
+    border-color: rgba(255,255,255,1) !important
 }

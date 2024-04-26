@@ -5,8 +5,8 @@ body {
 	height: inherit;
 }
 .section-container {
-	margin-top: 70px;
-	margin-bottom: 70px;
+	padding-top: 70px;
+	padding-bottom: 70px;
 }
 
 .settings-container .nav-link {
@@ -67,3 +67,10 @@ body {
 	color:#fff;
 	padding:6px 20px;
 }
+.navbar-dark,
+.navbar-toggler {
+    color: rgba(255,255,255,1) !important;
+    border-color: rgba(255,255,255,1) !important
+}
+
+

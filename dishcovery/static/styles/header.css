@@ -1,7 +1,7 @@
 header {
   top: 0;
   position: fixed;
-  height: 70px;
+  /* height: 70px; */
   width: 100%;
   border-bottom: 1px solid #cccccc;
   background-repeat: no-repeat;
@@ -9,11 +9,15 @@ header {
   flex-shrink: 0;
   border-width: 0;
 
-  background-color: #88ab8e;
+  /* background-color: #88ab8e; */
   font-family: cursive;
 
   z-index: 1000;
 }
 header h1 {
     padding-left: 20px;
+}
+
+header nav.navbar{
+	background-color: #88ab8e !important;
 }

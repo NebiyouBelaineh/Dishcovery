@@ -12,3 +12,10 @@ a.logo {
   background-clip: text;
   -webkit-background-clip: text;
 }
+
+.custom-toggler,
+.navbar-toggler {
+	border-color: rgb(255,255,255) !important;
+	color:#fff !important;
+  }
+  

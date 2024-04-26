@@ -1,8 +1,62 @@
-{% extends 'base_2.html' %} {% block title %} Recipe Finder {% endblock %} {%
-block main %}
-<div class="container recipe_finder_container">
-  <main class="recipe_finder">
-    <h1>Bookmarks Page</h1>
+{% extends 'base_2.html' %} 
+{% block title %}
+ Recipe Finder 
+{% endblock %}
+
+{% block styles%}
+<link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
+<link rel="stylesheet" href="../static/styles/bookmarks.css" />
+{% endblock%}
+
+{% block script %}
+<script src="../static/scripts/bookmarks.js"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container section-container">
+  <main class="main container">
+	<div class="row gx-5 gy-5 justify-content-center">
+		<div class="col-4">
+			<div class="card" style="width: 18rem;">
+				<a href="" style="text-decoration: none;color:#000">
+				<img src="../static/images/1.jpg" class="card-img-top" alt="tomato">
+				<div class="card-body">
+				  <h5 class="card-title">Fresh Tomato Pizza Sauce From 'The Kitchn Cookbook'</h5>
+				</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card" style="width: 18rem;">
+				<a href="" style="text-decoration: none;color:#000">
+				<img src="../static/images/1.jpg" class="card-img-top" alt="tomato">
+				<div class="card-body">
+				  <h5 class="card-title">Fresh Tomato Pizza Sauce From 'The Kitchn Cookbook'</h5>
+				</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card" style="width: 18rem;">
+				<a href="" style="text-decoration: none;color:#000">
+				<img src="../static/images/1.jpg" class="card-img-top" alt="tomato">
+				<div class="card-body">
+				  <h5 class="card-title">Fresh Tomato Pizza Sauce From 'The Kitchn Cookbook'</h5>
+				</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card" style="width: 18rem;">
+				<a href="" style="text-decoration: none;color:#000">
+				<img src="../static/images/1.jpg" class="card-img-top" alt="tomato">
+				<div class="card-body">
+				  <h5 class="card-title">Fresh Tomato Pizza Sauce From 'The Kitchn Cookbook'</h5>
+				</div>
+				</a>
+			</div>
+		</div>
+	</div>
   </main>
 </div>
 
