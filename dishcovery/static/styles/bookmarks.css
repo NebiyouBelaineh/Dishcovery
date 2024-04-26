@@ -46,3 +46,8 @@ body {
     border-color: rgba(255,255,255,1) !important
 }
 
+
+.col-custom{
+	display:flex;
+	justify-content: center;
+}
