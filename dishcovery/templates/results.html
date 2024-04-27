@@ -8,9 +8,7 @@
 <link rel="stylesheet" href="../static/styles/bookmarks.css" />
 {% endblock%}
 
-{% block script %}
-<script src="../static/scripts/bookmarks.js"></script>
-{% endblock %}
+
 
 {% block main %}
 	<!-- ----------------Modal-------------------	 -->
@@ -18,10 +16,74 @@
 	<div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		<div class="modal-content">
-			
-			<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary">Understood</button>
+			<div class="modal-sections">
+				<div class="left-section">
+					<img src="../static/images/1.jpg" alt="tomato">
+					<div class="recipe-info">
+						<div class="info">
+							<ion-icon name="timer-outline"></ion-icon> <span class="infor-span">60</span> min.
+						</div>
+						<div class="info">
+							<ion-icon name="flame"></ion-icon> <span class="info-span">250</span> cal.
+						</div>
+					</div>
+					
+						<div class="click-view-content">
+							<a href="#" class="click-view"></a>
+							<div class="click-view-text">View Full Recipe</div> <ion-icon name="exit-outline"></ion-icon>
+						
+							</a>
+						</div>
+					
+					<div class="show-tags" id="showTags">Show Tags <ion-icon name="chevron-up-outline"></ion-icon></div>
+					<div class="tags-content" id="tagsContent">
+						<span class="tag">Tomato</span>
+						<span class="tag">Pasta</span>
+						<span class="tag">Orange</span>
+						<span class="tag">Onion</span>
+						<span class="tag">Tomato</span>
+						<span class="tag">Pasta</span>
+						<span class="tag">Orange</span>
+						<span class="tag">Onion</span>
+					</div>
+				</div>
+				<div class="right-section">
+					<div class="recipe-title">Tomato sauce</div>
+					<div class="recipe-author">
+						by <div class="author">Nebiyou Belaine</div>
+					</div>
+					<h3 class="heading-secondary">Ingredients:</h3>
+					<div class="ingredients-section">
+						<div class="ingredient">
+							1 cup chickpea flour (see tip)
+						</div>
+						<div class="ingredient">
+							1/2 teaspoon salt
+						</div>
+						<div class="ingredient">
+							1/2 teaspoon ground peper
+						</div>
+						<div class="ingredient">
+							1 cup water
+						</div>
+						<div class="ingredient">
+							2 tablespoons extra-virgin oil, divided 
+						</div>
+						<div class="ingredient">
+							1 medium plum tomato, thinly sliced 
+						</div>
+						<div class="ingredient">
+							1/2 torn or schreded smoked fresh mozzarella
+						</div>
+						<div class="ingredient">
+							2 tablespoons extra-virgin oil, divided 
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mod-footer">
+			<!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+			<button type="button" class="btn btn-primary btn-book">Bookmark</button>
 			</div>
 		</div>
 		</div>
@@ -50,4 +112,12 @@
   </main>
 </div>
 
+{% endblock %}
+
+
+{% block script %}
+<script src="../static/scripts/bookmarks.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 {% endblock %}

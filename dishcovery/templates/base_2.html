@@ -37,7 +37,7 @@
     <link rel="manifest" href="../static/images/favicon/site.webmanifest" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    {% block styles%} {% endblock%} {% block script%} {% endblock%}
+    {% block styles%} {% endblock%} 
 
     <title>{% block title %} {% endblock %}</title>
   </head>
@@ -103,5 +103,6 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+	{% block script%} {% endblock%}
   </body>
 </html>
