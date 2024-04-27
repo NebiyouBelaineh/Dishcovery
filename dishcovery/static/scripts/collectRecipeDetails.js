@@ -24,9 +24,9 @@ $(function () {
 
     const formDataObject = {
       ingredients: ingredientsList,
-      cuisines: cuisines,
-      meals: meals,
-      dishes: dishes,
+      cuisineType: cuisines,
+      mealType: meals,
+      dishType: dishes,
     };
     
     console.log(formDataObject);
