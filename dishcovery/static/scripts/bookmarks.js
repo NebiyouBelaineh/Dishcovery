@@ -10,5 +10,5 @@ cursor_tag.addEventListener("click", function(e){
 })
 $("#tagsContent").hide();
 $("#showTags").click(function(){
-	$("#tagsContent").slideToggle(400);
+	$("#tagsContent").slideToggle(300);
   });
