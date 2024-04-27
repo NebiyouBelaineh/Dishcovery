@@ -4,6 +4,7 @@ from dishcovery.models import db_storage
 db_storage.reload()
 
 app = Flask(__name__)
+recipeData = []
 
 # print("*****************inside models********************")
 from dishcovery import routes
