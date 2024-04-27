@@ -31,7 +31,7 @@
             >
           </h4>
           <br />
-          <form class="needs-validation recipe_form" novalidate>
+          <form id="recipeForm" class="needs-validation recipe_form" action="/results" method="post" novalidate>
             <div class="row">
               <div class="col-12 ingredientContainer">
                 <label for="ingredient" class="form-label"
@@ -68,7 +68,7 @@
                     >Style of cooking</span
                   ></label
                 >
-                <select id="cuisines" class="form-select shadow">
+                <select id="cuisines" class="form-select shadow" required>
                   {% for cuisine in cuisines%}
                   <option value="{{ cuisine }}">{{ cuisine }}</option>
                   {% endfor %}
@@ -80,7 +80,7 @@
                 <label for="meals" class="form-label"
                   >Meal Type<span class="badge rounded-pill bg-secondary"></span
                 ></label>
-                <select id="meals" class="form-select shadow">
+                <select id="meals" class="form-select shadow" required>
                   {% for meal in meals%}
                   <option value="{{ meal }}">{{ meal }}</option>
                   {% endfor %}
@@ -91,7 +91,7 @@
                 <label for="dishes" class="form-label"
                   >Dish Type<span class="badge rounded-pill bg-secondary"></span
                 ></label>
-                <select id="dishes" class="form-select shadow">
+                <select id="dishes" class="form-select shadow" required>
                   {% for dish in dishes%}
                   <option value="{{ dish }}">{{ dish }}</option>
                   {% endfor %}
@@ -108,7 +108,7 @@
       id="sumbitRecipeButton"
       class="btn btn-secondary btn-lg shadow"
       type="submit"
-    >
+      >
       Find Recipe
     </button>
   </div>
