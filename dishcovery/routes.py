@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from  dishcovery import app
-from dishcovery import recipeData
+from dishcovery import app, recipeData, recipeDetails
 import requests
 import os
 
@@ -27,16 +26,18 @@ def home_route():
 @app.route("/recipe_finder", strict_slashes=False)
 def recipe_finder():
     """ Serves the recipe finder page """
-    cuisine_types = ['(Default) - Any', 'American', 'Asian', 'British', 'Caribbean', \
-        'Central Europe', 'Chinese', 'Eastern Europe', 'French',\
-            'Indian', 'Italian', 'Japanese' ,'Kosher', 'Mediterranean',\
-                'Mexican', 'Middle Eastern', 'Nordic', 'South American',\
-                    'South East Asian']
-    meal_types = ['(Default) - Any', 'Breakfast', 'Dinner', 'Lunch', 'Snack', 'Teatime']
-    dish_types = ['(Default) - Any', 'Biscuits and cookies', 'Bread', 'Cereals',\
-        'Condiments and sauces', 'Desserts', 'Drinks', 'Main course',\
-            'Pancake', 'Preps', 'Preserve', 'Salad', 'Sandwiches',\
-                'Side dish', 'Soup', 'Starter', 'Sweets']
+    cuisine_types = ['(Default) - Any', 'American', 'Asian', 'British',
+                     'Caribbean', 'Central Europe', 'Chinese',
+                     'Eastern Europe', 'French', 'Indian', 'Italian',
+                     'Japanese', 'Kosher', 'Mediterranean', 'Mexican',
+                     'Middle Eastern', 'Nordic', 'South American',
+                     'South East Asian']
+    meal_types = ['(Default) - Any', 'Breakfast', 'Dinner', 'Lunch', 'Snack',
+                  'Teatime']
+    dish_types = ['(Default) - Any', 'Biscuits and cookies', 'Bread',
+                  'Cereals', 'Condiments and sauces', 'Desserts', 'Drinks',
+                  'Main course', 'Pancake', 'Preps', 'Preserve', 'Salad',
+                  'Sandwiches', 'Side dish', 'Soup', 'Starter', 'Sweets']
     return render_template('recipe_finder.html', cuisines=cuisine_types,
                            meals=meal_types, dishes=dish_types)
 
@@ -59,41 +60,76 @@ def logout_route():
     return render_template('login.html')
 
 
-
 @app.route("/search", strict_slashes=False, methods=['POST'])
 def search_route():
     """ Search for recipe """
-    recipe_details = request.get_json()
-    if len(recipeData):
+    ingredients = request.get_json()['ingredients']
+    cuisineType = request.get_json()['cuisineType']
+    mealType = request.get_json()['mealType']
+    dishType = request.get_json()['dishType']
+
+    ingredients_list = []
+    ingredients = [ingredients_list.append(ing.strip()) for ing in ingredients]
+    # sets to empty string if mealType not selected
+    ingredients_string = ",".join(ingredients_list)
+    # sets to empty string if cuisineType not selected
+    cuisine_string = ("&cuisineType=" + cuisineType if cuisineType != "" else
+                      "")
+    # sets to empty string if mealType not selected
+    meal_string = ("&mealType=" + mealType if mealType != "" else "")
+    # sets to empty string if dishType not selected
+    dish_string = ("&dishType=" + dishType if dishType != "" else "")
+
+    recipe_query = "".join(ingredients_string + cuisine_string + meal_string +
+                           dish_string)  # collects the recipe search params
+
+    # print("Recipe Details: ", recipe_query)
+
+    # Keeps the recipeData list to hold only one recipe find query
+    # and empties it if new query is made
+    if len(recipeData) and recipe_query != "":
         recipeData.pop()
-    if recipe_details:
-        print(recipe_details);
-        recipeData.append(recipe_details)
-    return redirect(url_for('result_route', recipe_details=recipe_details))
+        # recipeDetails = {}
+    if recipe_query:
+        print(recipe_query)
+        recipeData.append(recipe_query)
+
+    print("recipeData: ", recipeData[0])
+    return redirect(url_for('result_route', recipe_details=recipe_query))
 
 
 @app.route("/results", strict_slashes=False)
 def result_route():
     """ Shows results for recipe """
-    # recipe_details = recipeData
-    recipe_details = findRecipe(recipeData)
-    print('Inside result_route')
-    print('recipe_details: ',recipe_details)
-    return render_template('results.html', recipe_details=recipe_details)
+    hits = []
+    if len(recipeData):
+        # calls method to handle api call if request is not present
+        recipeDetails = findRecipe(recipeData[0])
+        hits = recipeDetails["hits"]
+
+    if hits != []:
+        print("Hits found")
+    else:
+        print("Not Hits found")
+    return render_template('results.html', recipe_details=hits)
+
 
 def findRecipe(recipeParam):
     """Finds recipe and returns response list"""
     try:
         api_key = os.environ.get("API_KEY")
         api_id = os.environ.get("API_ID")
-        response = requests.get(
-            f"https://api.edamam.com/api/recipes/v2?type=public&app_id={api_id}&app_key={api_key}&q={recipeParam}")
+        recipe_query = f"https://api.edamam.com/api/recipes/v2?type=public&app_id={api_id}&app_key={api_key}&q={recipeParam}"
+        response = requests.get(recipe_query)
         response.raise_for_status()
     except requests.RequestException:
         return None
     try:
         result = response.json()
-        print(result)
+        # print(result)
+        if len(recipeDetails):
+            recipeDetails.pop()
+            recipeDetails.append(result)
         return result
     except (KeyError, TypeError, ValueError):
         return None

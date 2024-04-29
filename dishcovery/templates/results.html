@@ -98,16 +98,18 @@
 
 
 	<div class="row gx-5 gy-5 justify-content-center">
+		{% for recipe in recipe_details: %}
 		<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-custom">
 			<div class="card" style="width: 18rem;">
 				<a href="" style="text-decoration: none;color:#000" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-				<img src="../static/images/1.jpg" class="card-img-top" alt="tomato">
+				<img src="{{ recipe.get("recipe").get("image")}}" class="card-img-top" alt="tomato">
 				<div class="card-body">
-				  <h5 class="card-title">Fresh Tomato Pizza Sauce From 'The Kitchn Cookbook'</h5>
+				  <h5 class="card-title">{{  recipe.get("recipe").get("label") }}</h5>
 				</div>
 				</a>
 			</div>
 		</div>
+		{% endfor %}
 	</div>
   </main>
 </div>
