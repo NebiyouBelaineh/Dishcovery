@@ -153,6 +153,22 @@ body {
     padding-bottom: 3px;
     margin-bottom: 5px;
 }
+.ingredients-list {
+    /* margin-bottom: 20px;
+    margin-top: 20px; */
+    font-weight: 600;
+    font-size: small;
+    font-family: cursive;
+}
+.ingredients-section {
+    background-color: #81a0876d;
+    border-radius: 5px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+}
+ul.ingredients-section {
+    margin: 15px 0;
+}
 h3.heading-secondary {
     font-size: 16px;
     color: #a1a1a1;

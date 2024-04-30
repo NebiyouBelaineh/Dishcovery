@@ -2,6 +2,8 @@ from flask import render_template, request, redirect, url_for
 from dishcovery import app, recipeData, recipeDetails
 import requests
 import os
+import json
+import signal
 
 
 @app.route("/login", strict_slashes=False)
@@ -105,7 +107,11 @@ def result_route():
     if len(recipeData):
         # calls method to handle api call if request is not present
         recipeDetails = findRecipe(recipeData[0])
-        hits = recipeDetails["hits"]
+        if recipeDetails:  # check if recipeDetails is not None
+            hits = recipeDetails["hits"]
+            writeResponse(recipeDetails)  # Writes response to a JSON file
+        else:
+            print("Request returned NULL")
 
     if hits != []:
         print("Hits found")
@@ -122,7 +128,8 @@ def findRecipe(recipeParam):
         recipe_query = f"https://api.edamam.com/api/recipes/v2?type=public&app_id={api_id}&app_key={api_key}&q={recipeParam}"
         response = requests.get(recipe_query)
         response.raise_for_status()
-    except requests.RequestException:
+    except requests.RequestException as e:
+        print(e)
         return None
     try:
         result = response.json()
@@ -133,3 +140,39 @@ def findRecipe(recipeParam):
         return result
     except (KeyError, TypeError, ValueError):
         return None
+
+
+def writeResponse(response):
+    """Write the response from the api call to a JSON file"""
+    
+    file_path = 'dishcovery/static/data/tmp/response.json'
+
+    with open(file_path, 'w') as file:
+        file.write((json.dumps(response)))
+
+    print("JSON object saved to", file_path)
+
+
+def delete_file():
+    # Define the path of the file to be removed
+    file_path = 'dishcovery/static/data/tmp/response.json'
+    # Check if the file exists before trying to remove it
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        print(f"File {file_path} removed.")
+
+# @app.before_shutdown
+# def cleanup_before_shutdown():
+#     delete_file()
+
+def signal_handler(signum, frame):
+    # Call delete_file function before exiting
+    try:
+        delete_file()
+    except Exception:
+        pass
+    # Exit program
+    exit()
+
+# Register signal handler for SIGINT (Ctrl+C)
+signal.signal(signal.SIGINT, signal_handler)
