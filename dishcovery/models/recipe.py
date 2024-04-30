@@ -8,11 +8,11 @@ class Recipe(BaseModel):
     """Recipe class"""
     __tablename__ = "recipes"
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    bookmark_id = Column(String(60), ForeignKey('bookmarks.id'),
-                         nullable=False)
+    # bookmark_id = Column(String(60), ForeignKey('bookmarks.id'),
+    #                      nullable=False)
     label = Column(String(60), nullable=True)
     image_link = Column(String(60), nullable=True)
     ingredients = Column(Text, nullable=True)  # imported from a list
@@ -24,3 +24,4 @@ class Recipe(BaseModel):
 
     # bookmark = relationship('Bookmark', back_populates='recipe',
     # uselist=False)
+    recipe_owner = relationship("User", backref='recipes')  # One-to-Many (reverse relationship)

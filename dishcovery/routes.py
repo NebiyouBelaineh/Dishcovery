@@ -1,7 +1,10 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from dishcovery import app, recipeData, recipeDetails
 import requests
 import os
+from dishcovery.forms import RegisterForm
+from dishcovery.models import User
+from dishcovery.models import db_storage
 
 
 @app.route("/login", strict_slashes=False)
@@ -10,10 +13,25 @@ def login_route():
     return render_template('login.html')
 
 
-@app.route("/register", strict_slashes=False)
+@app.route("/register", strict_slashes=False, methods=["POST", "GET"])
 def register_route():
     """ Serves register page """
-    return render_template('register.html')
+    # will deal with form
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user_to_create = User(firstname=form.first_name.data,
+                              lastname=form.last_name.data,
+                              email=form.email_address.data,
+                              password=form.password1.data
+                              )
+        db_storage.new(user_to_create)
+        db_storage.save()
+        # redirect the user to the specific route using redirect and url_for
+        return redirect(url_for('login_route'))
+    if form.errors != {}:
+        for err_msg in form.errors.values():
+            flash(f'{err_msg}', category="danger")
+    return render_template('register.html', form=form)
 
 
 @app.route("/home", strict_slashes=False)

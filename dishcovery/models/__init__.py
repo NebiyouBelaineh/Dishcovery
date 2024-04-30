@@ -10,5 +10,5 @@ db_storage = DBStorage()
 
 # Import model classes after initializing tables
 from dishcovery.models.user import User
-from dishcovery.models.recipe import Recipe
+# from dishcovery.models.recipe import Recipe
 from dishcovery.models.bookmark import Bookmark

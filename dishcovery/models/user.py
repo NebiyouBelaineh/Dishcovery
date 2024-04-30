@@ -6,12 +6,13 @@ from sqlalchemy.orm import relationship
 from hashlib import md5
 
 
+
 class User(BaseModel):
     """User class containing user information"""
     __tablename__ = "users"
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     email = Column(String(128), unique=True, nullable=False)
     password = Column(String(128), nullable=False)  # Should be converted to md5
@@ -23,6 +24,8 @@ class User(BaseModel):
 
     def __setattr__(self, name, value):
         """Sets a password with md5 encryption"""
+        from dishcovery import bcrypt
         if name == "password":
-            value = md5(value.encode()).hexdigest()
+            # value = md5(value.encode()).hexdigest()
+            value = bcrypt.generate_password_hash(value).decode('utf-8')
         super().__setattr__(name, value)
