@@ -6,7 +6,8 @@ $(function () {
 
     // Obtain the recipeTitle to use as a search parameter
     const recipeLink = event.currentTarget;
-    const recipeTitle = recipeLink.querySelector("h5").textContent;
+    // trim() used to remove spaces from both sides of the h5 element due to formatting
+    const recipeTitle = recipeLink.querySelector("h5").textContent.trim();
     console.log(recipeTitle);
 
     fetch(filename)
@@ -30,7 +31,7 @@ $(function () {
             const ingredients = element.recipe.ingredientLines;
             const calories = element.recipe.calories;
             const totalTime = element.recipe.totalTime;
-            const tags = element.recipe.tags;
+            let tags = element.recipe.tags;
             const img = element.recipe.image;
             const fullDetails = element.recipe.url;
 
@@ -55,12 +56,15 @@ $(function () {
               .querySelector(".fulldetails")
               .setAttribute("href", fullDetails);
 
+            const healthLabels = document.querySelector(".healthLabels");
+            // Clears the tags from previous tags
+            healthLabels.innerHTML = "";
             if (Array.isArray(tags)) {
               tags.forEach((tag) => {
                 const span = document.createElement("span");
                 span.classList.add("tag");
                 span.textContent = tag;
-                document.querySelector(".healthLabels").appendChild(span);
+                healthLabels.appendChild(span);
               });
             }
 

@@ -15,8 +15,25 @@ $(function () {
     console.log("Add button clicked!");
     const ingrident = document.getElementById("ingredients");
     const inputText = ingrident.value;
+    let boolAddedBefore = false;
+    const ingredients = document.querySelectorAll(".selectedIngredients");
 
-    if (inputText !== "") {
+    ingredients.forEach((element) => {
+      let inputBefore = element.textContent
+        .trim()
+        .replace("x", "")
+        .replace(" ", "")
+        .toLowerCase();
+      // console.log("inputBefore:", inputBefore, inputBefore.length);
+      // console.log("inputText:", inputText, inputText.length)
+
+      if (inputBefore === inputText) {
+        boolAddedBefore = true;
+        console.log("boolAddedBefore: ", boolAddedBefore);
+      }
+    });
+
+    if (inputText !== "" && !boolAddedBefore) {
       // If no text inside the input, nothing happens
       // console.log(inputText);
       const container = document.querySelector(".ingredientContainer");

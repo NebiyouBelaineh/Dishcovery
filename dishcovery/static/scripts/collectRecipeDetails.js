@@ -1,5 +1,5 @@
-const ingredientsList = [];
 $(function () {
+  const ingredientsList = [];
   function removePromptStr (str) {
     if (str.length === 0) {
       return str;
@@ -13,7 +13,8 @@ $(function () {
     let dishes = document.getElementById('dishes').value;
 
     // console.log(ingredients)
-    ingredients.forEach((element) => { // After collecting all ingredients into an array, this will
+    // After collecting all ingredients into an array, this will remove the prompt string
+    ingredients.forEach((element) => {
       ingredientsList.push(removePromptStr(element.textContent));
       //   console.log(removePromptStr(element.textContent));
     });

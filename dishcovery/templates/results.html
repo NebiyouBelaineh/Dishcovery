@@ -1,4 +1,4 @@
-{% extends 'base_2.html' %} {% block title %} Recipe Finder {% endblock %} {%
+{% extends 'base_2.html' %} {% block title %} Results {% endblock %} {%
 block styles%}
 <link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
 <link rel="stylesheet" href="../static/styles/bookmarks.css" />
@@ -36,7 +36,6 @@ block styles%}
           <div class="click-view-content">
             <a href="" class="click-view fulldetails">
               <div class="click-view-text">View Full Recipe</div>
-              <ion-icon name="exit-outline"></ion-icon>
             </a>
           </div>
 
@@ -80,9 +79,11 @@ block styles%}
             data-bs-target="#staticBackdrop"
           >
             <img src="{{ recipe.get("recipe").get("image")}}"
-            class="card-img-top" alt="tomato">
+            class="card-img-top" alt="recipe-img">
             <div class="card-body recipe-card">
-              <h5 class="card-title">{{ recipe.get("recipe").get("label") }}</h5>
+              <h5 class="card-title">
+                {{ recipe.get("recipe").get("label") }}
+              </h5>
             </div>
           </a>
         </div>

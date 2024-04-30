@@ -86,9 +86,11 @@ body {
     font-size: 12px;
     font-weight: 500;
 }
-
+a.fulldetails {
+    color: unset;
+}
 .click-view-content {
-    background: #ebad38;
+    background: #948979;
     width: 200px;
     margin-inline: auto;
     display: flex;
@@ -113,7 +115,7 @@ body {
 	color: #fff;
 }
 .click-view-content:hover{
-	background-color:#e8ab3b;
+	background-color:#AF8260;
 	color:#fff;
 	box-shadow: 1px 2px 7px rgba(0,0,0,.3);
 }
@@ -198,11 +200,14 @@ h3.heading-secondary {
 }
 button.btn.btn-primary.btn-book {
     padding: 10px 40px;
-    background-color: #88ab8e;
+    background-color: #003C43;
     font-weight: 500;
     border: none;
 	transition:background-color .4s ease,
 	box-shadow .4s ease;
+}
+button.btn.btn-primary.btn-book:hover {
+    background-color: #77B0AA ;
 }
 .btn:focus,.btn:active {
 	outline: none !important;

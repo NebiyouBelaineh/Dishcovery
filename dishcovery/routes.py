@@ -115,9 +115,10 @@ def result_route():
 
     if hits != []:
         print("Hits found")
-    else:
+        return render_template('results.html', recipe_details=hits)
+    else:  # Serves recipe_not_found page if no hits found with redirect option
         print("Not Hits found")
-    return render_template('results.html', recipe_details=hits)
+        return render_template('recipe_not_found.html')
 
 
 def findRecipe(recipeParam):
@@ -125,7 +126,8 @@ def findRecipe(recipeParam):
     try:
         api_key = os.environ.get("API_KEY")
         api_id = os.environ.get("API_ID")
-        recipe_query = f"https://api.edamam.com/api/recipes/v2?type=public&app_id={api_id}&app_key={api_key}&q={recipeParam}"
+        recipe_query = f"https://api.edamam.com/api/recipes/v2?type=public&\
+app_id={api_id}&app_key={api_key}&q={recipeParam}"
         response = requests.get(recipe_query)
         response.raise_for_status()
     except requests.RequestException as e:
@@ -144,7 +146,6 @@ def findRecipe(recipeParam):
 
 def writeResponse(response):
     """Write the response from the api call to a JSON file"""
-    
     file_path = 'dishcovery/static/data/tmp/response.json'
 
     with open(file_path, 'w') as file:
@@ -161,9 +162,6 @@ def delete_file():
         os.remove(file_path)
         print(f"File {file_path} removed.")
 
-# @app.before_shutdown
-# def cleanup_before_shutdown():
-#     delete_file()
 
 def signal_handler(signum, frame):
     # Call delete_file function before exiting
@@ -173,6 +171,7 @@ def signal_handler(signum, frame):
         pass
     # Exit program
     exit()
+
 
 # Register signal handler for SIGINT (Ctrl+C)
 signal.signal(signal.SIGINT, signal_handler)
