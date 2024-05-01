@@ -1,0 +1,28 @@
+{% extends 'base_2.html' %} {% block title %} Recipe Not Found {% endblock %} {%
+block styles%}
+<link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
+<link rel="stylesheet" href="../static/styles/bookmarks.css" />
+{% endblock%} {% block main %}
+<div class="container section-container">
+  <main class="main container">
+    <div class="row gx-5 gy-2 justify-content-center">
+      <h3>No recipes found for your selections!</h3>
+      <p>
+        Please try again with different selections
+        <span class="emoji">&#x1F609;</span>
+      </p>
+      <p>Press the button below to go back to the recipe finder page</p>
+      <div>
+        <a href="{{ url_for('recipe_finder') }}">
+          <button type="button" class="btn btn-secondary btn-lg">
+            Recipe Finder Page
+          </button>
+        </a>
+      </div>
+    </div>
+  </main>
+</div>
+
+{% endblock %} {% block scripts %}
+<script src="../static/scripts/bookmarks.js"></script>
+{% endblock scripts %}

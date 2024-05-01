@@ -6,6 +6,8 @@ from dishcovery.forms import RegisterForm, LoginForm
 from dishcovery.models import User
 from dishcovery.models import db_storage
 from flask_login import login_user, logout_user, login_required
+import json
+import signal
 
 @app.route("/login", strict_slashes=False, methods=['POST','GET'])
 def login_route():
@@ -142,13 +144,18 @@ def result_route():
     if len(recipeData):
         # calls method to handle api call if request is not present
         recipeDetails = findRecipe(recipeData[0])
-        hits = recipeDetails["hits"]
+        if recipeDetails:  # check if recipeDetails is not None
+            hits = recipeDetails["hits"]
+            writeResponse(recipeDetails)  # Writes response to a JSON file
+        else:
+            print("Request returned NULL")
 
     if hits != []:
         print("Hits found")
-    else:
+        return render_template('results.html', recipe_details=hits)
+    else:  # Serves recipe_not_found page if no hits found with redirect option
         print("Not Hits found")
-    return render_template('results.html', recipe_details=hits)
+        return render_template('recipe_not_found.html')
 
 
 def findRecipe(recipeParam):
@@ -156,10 +163,12 @@ def findRecipe(recipeParam):
     try:
         api_key = os.environ.get("API_KEY")
         api_id = os.environ.get("API_ID")
-        recipe_query = f"https://api.edamam.com/api/recipes/v2?type=public&app_id={api_id}&app_key={api_key}&q={recipeParam}"
+        recipe_query = f"https://api.edamam.com/api/recipes/v2?type=public&\
+app_id={api_id}&app_key={api_key}&q={recipeParam}"
         response = requests.get(recipe_query)
         response.raise_for_status()
-    except requests.RequestException:
+    except requests.RequestException as e:
+        print(e)
         return None
     try:
         result = response.json()
@@ -170,3 +179,36 @@ def findRecipe(recipeParam):
         return result
     except (KeyError, TypeError, ValueError):
         return None
+
+
+def writeResponse(response):
+    """Write the response from the api call to a JSON file"""
+    file_path = 'dishcovery/static/data/tmp/response.json'
+
+    with open(file_path, 'w') as file:
+        file.write((json.dumps(response)))
+
+    print("JSON object saved to", file_path)
+
+
+def delete_file():
+    # Define the path of the file to be removed
+    file_path = 'dishcovery/static/data/tmp/response.json'
+    # Check if the file exists before trying to remove it
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        print(f"File {file_path} removed.")
+
+
+def signal_handler(signum, frame):
+    # Call delete_file function before exiting
+    try:
+        delete_file()
+    except Exception:
+        pass
+    # Exit program
+    exit()
+
+
+# Register signal handler for SIGINT (Ctrl+C)
+signal.signal(signal.SIGINT, signal_handler)

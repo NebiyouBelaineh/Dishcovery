@@ -86,9 +86,11 @@ body {
     font-size: 12px;
     font-weight: 500;
 }
-
+a.fulldetails {
+    color: unset;
+}
 .click-view-content {
-    background: #ebad38;
+    background: #948979;
     width: 200px;
     margin-inline: auto;
     display: flex;
@@ -113,7 +115,7 @@ body {
 	color: #fff;
 }
 .click-view-content:hover{
-	background-color:#e8ab3b;
+	background-color:#AF8260;
 	color:#fff;
 	box-shadow: 1px 2px 7px rgba(0,0,0,.3);
 }
@@ -153,6 +155,22 @@ body {
     padding-bottom: 3px;
     margin-bottom: 5px;
 }
+.ingredients-list {
+    /* margin-bottom: 20px;
+    margin-top: 20px; */
+    font-weight: 600;
+    font-size: small;
+    font-family: cursive;
+}
+.ingredients-section {
+    background-color: #81a0876d;
+    border-radius: 5px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+}
+ul.ingredients-section {
+    margin: 15px 0;
+}
 h3.heading-secondary {
     font-size: 16px;
     color: #a1a1a1;
@@ -182,12 +200,39 @@ h3.heading-secondary {
 }
 button.btn.btn-primary.btn-book {
     padding: 10px 40px;
-    background-color: #88ab8e;
+    background-color: #003C43;
     font-weight: 500;
     border: none;
 	transition:background-color .4s ease,
 	box-shadow .4s ease;
 }
+button.btn.btn-primary.btn-book:hover {
+    background-color: #77B0AA ;
+}
+.main {
+    background: #9b863314;
+}
+.card-container {
+    border-radius: 15px;
+}
+.card {
+    border-radius: inherit;
+}
+.pdf-btn {
+    color: #fff
+}
+.main-logo h1 {
+    text-align: center;
+    font-family: cursive;
+    font-size: 70px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #fff2f2, #689e3c);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+
 .btn:focus,.btn:active {
 	outline: none !important;
 	box-shadow: none !important;
