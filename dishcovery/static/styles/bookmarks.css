@@ -209,6 +209,30 @@ button.btn.btn-primary.btn-book {
 button.btn.btn-primary.btn-book:hover {
     background-color: #77B0AA ;
 }
+.main {
+    background: #9b863314;
+}
+.card-container {
+    border-radius: 15px;
+}
+.card {
+    border-radius: inherit;
+}
+.pdf-btn {
+    color: #fff
+}
+.main-logo h1 {
+    text-align: center;
+    font-family: cursive;
+    font-size: 70px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #fff2f2, #689e3c);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+
 .btn:focus,.btn:active {
 	outline: none !important;
 	box-shadow: none !important;

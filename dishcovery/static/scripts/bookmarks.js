@@ -12,4 +12,11 @@ $(function () {
   $("#showTags").click(function () {
     $("#tagsContent").slideToggle(300);
   });
+
+  // document.getElementById("pdf-btn").addEventListener("click", saveToPDF);
+  $('#pdf-btn').click(function() {
+    $('#modal-section').printThis({
+      loadCSS: "dishcovery/static/styles/bookmarks.css"
+    })
+  })
 });
