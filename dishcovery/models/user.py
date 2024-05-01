@@ -4,10 +4,15 @@ from dishcovery.models.base_model import BaseModel
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from hashlib import md5
-
+"""
+disable to create tables;
+"""
 from dishcovery import login_manager
 from flask_login import UserMixin
 
+"""
+disable to create tables;
+"""
 @login_manager.user_loader
 def load_user(user_id):
     from dishcovery.models import db_storage

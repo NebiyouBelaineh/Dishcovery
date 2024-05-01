@@ -7,8 +7,7 @@ from flask_login import LoginManager
 
 load_dotenv()
 """
-add these 2 lines when creating the database in the beggining
-then put the db_storage.reload int he __init__ file of the module file
+enable this after creating tables;
 """
 # from dishcovery.models import db_storage
 # db_storage.reload()
