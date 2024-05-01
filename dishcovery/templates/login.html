@@ -1,52 +1,39 @@
+{% extends 'base_1.html' %} {% block title %} Register {% endblock %} {% block
+	main %}
+	<div class="container">
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+					{{ message.strip("[]").strip("\'").strip("\"") }}
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				  </div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	  <main class="form-signin">
+		<form method="POST" action="/login">
+			<!-- ---protect from cros forgery attacks--- -->
+			{{ form.hidden_tag() }}
 
-{% extends 'base_1.html' %}
-
-{% block title %}
-Login
-{% endblock %}
-
-{% block main %}
-
-<div class="container">
-	<main class="form-signin">
-	<form>
-		<img
-			class="mb-4 main-logo"
-			src="../static/images/DishCovery_logo_light_1.png"
-			alt="Dishcovery"
-			width="300px"
-		/>
-		<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-		
-		<div class="form-floating">
-			<input
-			type="email"
-			class="form-control"
-			id="floatingInput"
-			placeholder="name@example.com"
-			/>
-			<label for="floatingInput">Email address</label>
-		</div>
-		<div class="form-floating">
-			<input
-			type="password"
-			class="form-control"
-			id="floatingPassword"
-			placeholder="Password"
-			/>
-			<label for="floatingPassword">Password</label>
-		</div>
-		
-		<div class="checkbox mb-3">
-			<label>
-			<input type="checkbox" value="remember-me" /> Remember me
-			</label>
-		</div>
-		<button class="w-100 btn btn-lg btn-secondary" type="submit">
-			Sign in
-		</button>
+		  <h1 class="h3 mb-3 fw-normal">Please Sign in</h1>
+	
+		  
+		  <div class="form-floating">
+			{{ form.email_address(class="form-control", id="email", placeholder="name@email.com") }}
+			{{ form.email_address.label(for="email") }}
+		  </div>
+		  <div class="form-floating">
+			{{ form.password1(class="form-control", id="password", placeholder="Password") }}
+			{{ form.password1.label(for="password") }}
+		  </div>
+	
+		  <div class="form-floating" style="margin-top:10px">
+			<span>Do not have and account</span> <a href="{{ url_for('register_route') }}" class="btn btn-sm btn-secondary">Register</a>
+		  </div>
+		  {{ form.submit(class="w-100 btn btn-lg btn-secondary custom-register") }}
 		</form>
-	</main>
-</div>
-{% endblock %}
-
+	  </main>
+	</div>
+	{% endblock %}
+	

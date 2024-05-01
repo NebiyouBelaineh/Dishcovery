@@ -15,81 +15,37 @@
 		<form method="POST" action="/register">
 			<!-- ---protect from cros forgery attacks--- -->
 			{{ form.hidden_tag() }}
-		  <!-- <img
-			class="mb-4 main-logo"
-			src="../static/images/DishCovery_logo_light_1.png"
-			alt="Dishcovery"
-			width="300px"
-		  /> -->
+		  
 		  <h1 class="h3 mb-3 fw-normal">Please register</h1>
 	
 		  <div class="form-floating">
-			<!-- <input
-			  type="text"
-			  class="form-control"
-			  id="fname"
-			  name="fname"
-			  placeholder="name@example.com"
-			/>
-			<label for="fname">First name</label> -->
+			
 			{{ form.first_name(class="form-control", id="fname", placeholder="First name") }}
 			{{ form.first_name.label(for="fname") }}
 		  </div>
 		  <div class="form-floating">
-			<!-- <input
-			  type="text"
-			  class="form-control"
-			  id="lname"
-			  name="lname"
-			  placeholder="name@example.com"
-			/> -->
-			<!-- <label for="lname">Last name</label> -->
 			{{ form.last_name(class="form-control", id="lname", placeholder="Last name") }}
 			{{ form.last_name.label(for="lname") }}
 		  </div>
 		  <div class="form-floating">
-			<!-- <input
-			  type="email"
-			  class="form-control"
-			  id="email"
-			  name="email"
-			  placeholder="name@example.com"
-			/>
-			<label for="email">Email address</label> -->
+			
 			{{ form.email_address(class="form-control", id="email", placeholder="name@email.com") }}
 			{{ form.email_address.label(for="email") }}
 		  </div>
 		  <div class="form-floating">
-			<!-- <input
-			  type="password"
-			  class="form-control"
-			  id="password"
-			  name="password"
-			  placeholder="Password"
-			/>
-			<label for="password">Password</label> -->
+			
 			{{ form.password1(class="form-control", id="password", placeholder="Password") }}
 			{{ form.password1.label(for="password") }}
 		  </div>
 		  <div class="form-floating">
-			<!-- <input
-			  type="password"
-			  class="form-control"
-			  id="cpassword"
-			  name="cpassword"
-			  placeholder="Confirm Password"
-			/>
-			<label for="cpassword">Confirm Password</label> -->
+			
 			{{ form.password2(class="form-control", id="cpassword", placeholder="Confirm Password") }}
 			{{ form.password2.label(for="cpassword") }}
 		  </div>
 	
-		  <!-- <button
-			class="w-100 btn btn-lg btn-secondary custom-register"
-			type="submit"
-		  >
-			Register -->
-		  </button>
+			<div class="form-floating" style="margin-top:10px">
+				<span>Do you have and account</span> <a href="{{ url_for('login_route') }}" class="btn btn-sm btn-secondary">Sign in</a>
+			  </div>
 		  {{ form.submit(class="w-100 btn btn-lg btn-secondary custom-register") }}
 		</form>
 	  </main>

@@ -2,15 +2,25 @@ from flask import render_template, request, redirect, url_for, flash
 from dishcovery import app, recipeData, recipeDetails
 import requests
 import os
-from dishcovery.forms import RegisterForm
+from dishcovery.forms import RegisterForm, LoginForm
 from dishcovery.models import User
 from dishcovery.models import db_storage
+from flask_login import login_user, logout_user, login_required
 
-
-@app.route("/login", strict_slashes=False)
+@app.route("/login", strict_slashes=False, methods=['POST','GET'])
 def login_route():
     """Serves Login Page"""
-    return render_template('login.html')
+    form = LoginForm()
+    if form.validate_on_submit():
+        attempted_user = db_storage.getSession().query(User).filter_by(email=form.email_address.data).first()
+        if attempted_user and attempted_user.check_password(
+            attempted_password=form.password1.data):
+            login_user(attempted_user)
+            # flash(f'Success! You are logged in as: {attempted_user.full_name()}', category='success')
+            return redirect(url_for('recipe_finder'))
+        else:
+            flash('Username and password are not match! Please try again', category='danger')
+    return render_template('login.html', form=form)
 
 
 @app.route("/register", strict_slashes=False, methods=["POST", "GET"])
@@ -26,6 +36,7 @@ def register_route():
                               )
         db_storage.new(user_to_create)
         db_storage.save()
+        flash(f"User {user_to_create.full_name()} created successfully! please sign in to access the app", category="info")
         # redirect the user to the specific route using redirect and url_for
         return redirect(url_for('login_route'))
     if form.errors != {}:
@@ -42,6 +53,7 @@ def home_route():
 
 
 @app.route("/recipe_finder", strict_slashes=False)
+@login_required
 def recipe_finder():
     """ Serves the recipe finder page """
     cuisine_types = ['(Default) - Any', 'American', 'Asian', 'British',
@@ -61,24 +73,30 @@ def recipe_finder():
 
 
 @app.route("/bookmarks", strict_slashes=False)
+@login_required
 def bookmark_route():
     """ Serves the bookmarks page """
     return render_template('bookmarks.html')
 
 
 @app.route("/settings", strict_slashes=False)
+@login_required
 def settings_route():
     """ Serves the settings page """
     return render_template('settings.html')
 
 
 @app.route("/logout", strict_slashes=False)
+@login_required
 def logout_route():
     """ Logs out user and serves login page """
-    return render_template('login.html')
+    logout_user()
+    flash('You have been logged out Successfully!', category="info")
+    return redirect(url_for('login_route'))
 
 
 @app.route("/search", strict_slashes=False, methods=['POST'])
+@login_required
 def search_route():
     """ Search for recipe """
     ingredients = request.get_json()['ingredients']
@@ -117,6 +135,7 @@ def search_route():
 
 
 @app.route("/results", strict_slashes=False)
+@login_required
 def result_route():
     """ Shows results for recipe """
     hits = []
