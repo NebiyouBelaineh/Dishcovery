@@ -16,34 +16,102 @@ Recipe Finder
 {% block main %}
 
 <div class="container-sm section-container">
-	<main class="main">
+	<main class="main" style="margin-top:20px;">
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="width:fit-content; margin-inline:auto">
+						{{ message.strip("[]").strip("\'").strip("\"") }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
 		<p class="main-para">Update your account informations</h1>
 		<div class="d-flex align-items-start settings-container">
 			<div class="nav flex-column nav-pills me-3" id="v-pills-tab list" role="tablist" aria-orientation="vertical">
-			  <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit Name</button>
-			  <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change username</button>
-			  <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Change password</button>
+			  <button 
+			  	
+					{% if message|string() == "message1"|string()  %}
+					class="nav-link active"
+					{% else %}
+					class="nav-link"
+					{% endif %}
+				id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit First name</button>
+			  <button 
+			  {% if message|string() == "message2"|string()  %}
+					class="nav-link active"
+					{% else %}
+					class="nav-link"
+					{% endif %}
+			  id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Last name</button>
+			  <button 
+			  {% if message|string() == "message3"|string()  %}
+					class="nav-link active"
+					{% else %}
+					class="nav-link"
+					{% endif %}
+			  id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-email" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Email Adress</button>
+			  <button 
+			  {% if message|string() == "message4"|string()  %}
+					class="nav-link active"
+					{% else %}
+					class="nav-link"
+					{% endif %}
+			  id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Change password</button>
 			</div>
-			<div class="tab-content content" id="v-pills-tabContent">
-			  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-				<p class="content-text">Current Name:</p>
-				<p class="content-name">Nebiyou Belaine</p>
-				<input type="text" name="name" placeholder="Enter new name">
-				<input class="btn" type="submit" value="Save Changes"> 
-			  </div>
-			  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-				<p class="content-text">Current Username:</p>
-				<p class="content-name">neba_sb</p>
-				<input type="text" name="username" placeholder="Enter new username">
-				<input class="btn" type="submit" value="Save Changes">
-			  </div>
-			  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-				<input type="text" name="current_pass" placeholder="Enter current password">
-				<input type="text" name="new_pass" placeholder="Enter new password">
-				<input type="text" name="confirm_pass" placeholder="Confirm new password">
-				<input class="btn" type="submit" value="Save Changes">
-			</div>
-			</div>
+			<form action="/settings" method="post" style="width:100%;" autocomplete="off">
+				<div class="tab-content content" id="v-pills-tabContent">
+						<div 
+							{% if message|string() == "message1"|string() %}
+								class="tab-pane fade show active"
+							{% else %}
+								class="tab-pane fade"
+							{% endif %}
+							id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+								<p class="content-text">Current First Name:</p>
+								<p class="content-name">{{ first_name }}</p>
+								<input type="text" name="first_name" placeholder="Enter new First name">
+								<input class="btn" type="submit" value="Save Changes"> 
+						</div>
+						<div 
+						{% if message|string() == "message2"|string()  %}
+							class="tab-pane fade show active"
+						{% else %}
+							class="tab-pane fade"
+						{% endif %}
+							id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+								<p class="content-text">Current Last Name:</p>
+								<p class="content-name">{{ last_name }}</p>
+								<input type="text" name="last_name" placeholder="Enter new Last name">
+								<input class="btn" type="submit" value="Save Changes">
+						</div>
+						<div 
+						{% if message|string() == "message3"|string()  %}
+							class="tab-pane fade show active"
+						{% else %}
+							class="tab-pane fade"
+						{% endif %}
+							id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">
+								<p class="content-text">Current Email Address:</p>
+								<p class="content-name">{{ email_address }}</p>
+								<input type="text" name="email_address" placeholder="Enter new Email Adress">
+								<input class="btn" type="submit" value="Save Changes">
+						</div>
+						<div 
+						{% if message|string() == "message4"|string()  %}
+							class="tab-pane fade show active"
+						{% else %}
+							class="tab-pane fade"
+						{% endif %}
+							id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+								<input type="text" name="current_pass" placeholder="Enter current password">
+								<input type="text" name="new_pass" placeholder="Enter new password">
+								<input type="text" name="confirm_pass" placeholder="Confirm new password">
+								<input class="btn" type="submit" value="Save Changes">
+						</div>
+				</div>
+			</form>
 		  </div>
 	</main>
 </div>

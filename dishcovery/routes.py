@@ -5,9 +5,10 @@ import os
 from dishcovery.forms import RegisterForm, LoginForm
 from dishcovery.models import User
 from dishcovery.models import db_storage
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 import json
 import signal
+import re
 
 @app.route("/login", strict_slashes=False, methods=['POST','GET'])
 def login_route():
@@ -22,6 +23,11 @@ def login_route():
             return redirect(url_for('recipe_finder'))
         else:
             flash('Username and password are not match! Please try again', category='danger')
+    if form.errors != {}:
+        print(form.errors)
+        for err_msg in form.errors.values():
+            flash(f'{err_msg}', category="danger")
+        
     return render_template('login.html', form=form)
 
 
@@ -42,6 +48,7 @@ def register_route():
         # redirect the user to the specific route using redirect and url_for
         return redirect(url_for('login_route'))
     if form.errors != {}:
+        print(form.errors)
         for err_msg in form.errors.values():
             flash(f'{err_msg}', category="danger")
     return render_template('register.html', form=form)
@@ -81,11 +88,81 @@ def bookmark_route():
     return render_template('bookmarks.html')
 
 
-@app.route("/settings", strict_slashes=False)
+@app.route("/settings", strict_slashes=False, methods=["GET","POST"])
 @login_required
 def settings_route():
     """ Serves the settings page """
-    return render_template('settings.html')
+    user_id = current_user.id
+    # flash(f'{user_id}', category="info")
+    
+    if request.method == "GET":
+        user = db_storage.getSession().query(User).get(user_id)
+        first_name = user.firstname
+        email_address = user.email
+        print(user.email)
+        last_name = user.lastname
+    else:
+        # First name
+        name = request.form.get("first_name").strip()
+        if name:
+            user_to_update = db_storage.getSession().query(User).get(user_id)
+            user_to_update.firstname = name
+            db_storage.save()
+            flash("First name changed successfully!", category='success')
+            return render_template('settings.html',
+                           message="message1",
+                           first_name=user_to_update.firstname.capitalize(),
+                           email_address=user_to_update.email,
+                           last_name=user_to_update.lastname.capitalize())
+        #Last name
+        last_name = request.form.get("last_name").strip()
+        if last_name:
+            user_to_update = db_storage.getSession().query(User).get(user_id)
+            user_to_update.lastname = last_name
+            db_storage.save()
+            flash("Last name changed successfully!", category='success')
+            return render_template('settings.html',
+                           message="message2",
+                           first_name=user_to_update.firstname.capitalize(),
+                           email_address=user_to_update.email,
+                           last_name=user_to_update.lastname.capitalize())
+        #Email Address
+        email_address = request.form.get("email_address").strip()
+        if email_address:
+            user_to_update = db_storage.getSession().query(User).get(user_id)
+            # check if valid email
+            if not is_valid_email(email_address):
+                flash("Email is not valid!", category='danger')
+                return render_template('settings.html',
+                           message="message3",
+                           first_name=user_to_update.firstname.capitalize(),
+                           email_address=user_to_update.email,
+                           last_name=user_to_update.lastname.capitalize())
+            # check if email doesnt exist in the database
+            if exist_email_address(email_address):
+                flash("Email address already exists! Please try different email address", category='danger')
+                return render_template('settings.html',
+                           message="message3",
+                           first_name=user_to_update.firstname.capitalize(),
+                           email_address=user_to_update.email,
+                           last_name=user_to_update.lastname.capitalize())
+                
+            user_to_update.email = email_address
+            db_storage.save()
+            flash("Email address changed successfully!", category='success')
+            return render_template('settings.html',
+                           message="message3",
+                           first_name=user_to_update.firstname.capitalize(),
+                           email_address=user_to_update.email,
+                           last_name=user_to_update.lastname.capitalize())
+        
+            
+            
+    return render_template('settings.html',
+                           message="message1",
+                           first_name=first_name.capitalize(),
+                           email_address=email_address,
+                           last_name=last_name.capitalize())
 
 
 @app.route("/logout", strict_slashes=False)
@@ -212,3 +289,31 @@ def signal_handler(signum, frame):
 
 # Register signal handler for SIGINT (Ctrl+C)
 signal.signal(signal.SIGINT, signal_handler)
+
+
+# check valid email
+def is_valid_email(email):
+    """
+    Check if a string is a valid email address.
+    
+    Args:
+        email (str): The string to be checked.
+    
+    Returns:
+        bool: True if the email is valid, False otherwise.
+    """
+    # Regular expression pattern for validating email addresses
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    
+    # Use re.match to search the pattern at the beginning of the string
+    if re.match(pattern, email):
+        return True
+    else:
+        return False
+
+def exist_email_address(email_to_check):
+        user = db_storage.getSession().query(User).filter_by(email=email_to_check).first()
+        if user:
+            return True
+        else:
+            return False
