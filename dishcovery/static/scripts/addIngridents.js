@@ -1,9 +1,9 @@
 let addedPrior = false;
 $(function () {
-  window.addEventListener("beforeunload", function () {
-    // Scroll to the top of the page
+  // Scroll page to top when reloaded
+  window.onload = function() {
     window.scrollTo(0, 0);
-  });
+  }
   function capitalizeFirstLetter(str) {
     if (str.length === 0) {
       return str;

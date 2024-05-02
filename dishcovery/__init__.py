@@ -19,6 +19,7 @@ app.config["SECRET_KEY"]=environ.get("DISHCOVERY_SECRET_KEY")
 recipeData = []
 # an empty list to hold recipe api response
 recipeDetails = []
+bookmarkDetails = []
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login_route"

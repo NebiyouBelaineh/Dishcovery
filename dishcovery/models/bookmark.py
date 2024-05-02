@@ -12,13 +12,13 @@ class Bookmark(BaseModel):
         super().__init__(*args, **kwargs)
     
     label = Column(String(60), nullable=True)
-    image_link = Column(String(60), nullable=True)
+    source = Column(String(60), nullable=True)
+    image_link = Column(Text, nullable=True)
     ingredients = Column(Text, nullable=True)  # imported from a list
-    preparation_time = Column(Integer, nullable=True, default=0)
-    calorie_intake = Column(Float, nullable=True, default=0.0)
-    link = Column(String(60), nullable=True)
+    total_time = Column(Float, nullable=True, default=0)
+    calories = Column(Float, nullable=True, default=0.0)
+    link = Column(Text, nullable=True) # fulldetails
     tags = Column(Text, nullable=True)
-    cousine_type = Column(Text, nullable=True)
 
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     # recipe_id = Column(String(60), ForeignKey('recipes.id'), nullable=False)

@@ -3,9 +3,9 @@ from dishcovery import app, recipeData, recipeDetails
 import requests
 import os
 from dishcovery.forms import RegisterForm, LoginForm
-from dishcovery.models import User
+from dishcovery.models import User, Bookmark
 from dishcovery.models import db_storage
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 import json
 import signal
 
@@ -78,7 +78,62 @@ def recipe_finder():
 @login_required
 def bookmark_route():
     """ Serves the bookmarks page """
-    return render_template('bookmarks.html')
+    bookmarks = current_user.bookmarks
+    print("bookmarks", bookmarks)
+    if len(bookmarks):
+        bookmark_details = bookmarks
+    else:
+        bookmark_details = "No details found."
+    # print("Bookmark details: ", bookmark_details)
+    
+    return render_template('bookmarks.html', bookmark_details=bookmark_details)
+
+
+@app.route("/save_bookmarks", strict_slashes=False, methods=['POST'])
+@login_required
+def save_bookmark_route():
+    """Saves bookmark if it is not saved alread"""
+    bookmark_details = request.get_json()
+    label = bookmark_details.get("label")
+    source = bookmark_details.get("source")
+    image_link = bookmark_details.get("img")
+    ingredients = bookmark_details.get("ingredients")
+    calories = bookmark_details.get("calories")
+    total_time = bookmark_details.get("total_time")
+    link = bookmark_details.get("link")
+    tags = bookmark_details.get("tags")
+    
+    ingredients_str = json.dumps(ingredients)
+    tags_str = json.dumps(tags)
+    
+    bookmark_details["ingredients"] = ingredients_str
+    bookmark_details["tags"] = tags_str
+    bookmark_details["user_id"] = current_user.id
+
+    print( "user_id: ",current_user.id, bookmark_details["user_id"])
+    
+    # print("type bookmark_details: ", type(bookmark_details))
+    print("type bookmark_details['ingredients']: ", ingredients)
+    print("type bookmark_details['ingredients'] dumps : ", ingredients_str)
+    print("type bookmark_details['ingredients'] dumps type : ", type(ingredients_str))
+    
+    if len(recipeDetails):
+        recipeDetails.clear()
+    recipeDetails.append(bookmark_details)
+    # bookmark = Bookmark(bookmark_details["user_id"])
+    bookmark = Bookmark(label=label,
+                    source=source,
+                    image_link=image_link,
+                    ingredients=ingredients_str,
+                    total_time=total_time,
+                    calories=calories,
+                    link=link,
+                    tags=tags,
+                    user_id=current_user.id)  # Assuming current_user has an id attribute
+    bookmark.save()
+    
+
+    return redirect(url_for('bookmark_route'))
 
 
 @app.route("/settings", strict_slashes=False)
@@ -127,13 +182,13 @@ def search_route():
     # and empties it if new query is made
     if len(recipeData) and recipe_query != "":
         recipeData.pop()
-        # recipeDetails = {}
+
     if recipe_query:
         print(recipe_query)
         recipeData.append(recipe_query)
 
     print("recipeData: ", recipeData[0])
-    return redirect(url_for('result_route', recipe_details=recipe_query))
+    return redirect(url_for('result_route'))
 
 
 @app.route("/results", strict_slashes=False)
@@ -143,10 +198,10 @@ def result_route():
     hits = []
     if len(recipeData):
         # calls method to handle api call if request is not present
-        recipeDetails = findRecipe(recipeData[0])
-        if recipeDetails:  # check if recipeDetails is not None
-            hits = recipeDetails["hits"]
-            writeResponse(recipeDetails)  # Writes response to a JSON file
+        recipe_details = findRecipe(recipeData[0])
+        if recipe_details:  # check if recipe_details is not None
+            hits = recipe_details["hits"]
+            writeResponse(recipe_details)  # Writes response to a JSON file
         else:
             print("Request returned NULL")
 
@@ -156,6 +211,8 @@ def result_route():
     else:  # Serves recipe_not_found page if no hits found with redirect option
         print("Not Hits found")
         return render_template('recipe_not_found.html')
+
+###################### NON Route methods ############################
 
 
 def findRecipe(recipeParam):
@@ -173,9 +230,9 @@ app_id={api_id}&app_key={api_key}&q={recipeParam}"
     try:
         result = response.json()
         # print(result)
-        if len(recipeDetails):
-            recipeDetails.pop()
-            recipeDetails.append(result)
+        # if len(recipeDetails):
+        #     recipeDetails.pop()
+        #     recipeDetails.append(result)
         return result
     except (KeyError, TypeError, ValueError):
         return None
