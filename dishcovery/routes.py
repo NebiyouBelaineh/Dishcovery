@@ -92,20 +92,11 @@ def bookmark_route():
 @login_required
 def settings_route():
     """ Serves the settings page """
-    user_id = current_user.id
-    # flash(f'{user_id}', category="info")
-    
-    if request.method == "GET":
-        user = db_storage.getSession().query(User).get(user_id)
-        first_name = user.firstname
-        email_address = user.email
-        print(user.email)
-        last_name = user.lastname
-    else:
+    if request.method == "POST":
         # First name
         name = request.form.get("first_name").strip()
         if name:
-            user_to_update = db_storage.getSession().query(User).get(user_id)
+            user_to_update = db_storage.getSession().query(User).get(current_user.id)
             user_to_update.firstname = name
             db_storage.save()
             flash("First name changed successfully!", category='success')
@@ -117,7 +108,7 @@ def settings_route():
         #Last name
         last_name = request.form.get("last_name").strip()
         if last_name:
-            user_to_update = db_storage.getSession().query(User).get(user_id)
+            user_to_update = db_storage.getSession().query(User).get(current_user.id)
             user_to_update.lastname = last_name
             db_storage.save()
             flash("Last name changed successfully!", category='success')
@@ -129,7 +120,7 @@ def settings_route():
         #Email Address
         email_address = request.form.get("email_address").strip()
         if email_address:
-            user_to_update = db_storage.getSession().query(User).get(user_id)
+            user_to_update = db_storage.getSession().query(User).get(current_user.id)
             # check if valid email
             if not is_valid_email(email_address):
                 flash("Email is not valid!", category='danger')
@@ -155,14 +146,47 @@ def settings_route():
                            first_name=user_to_update.firstname.capitalize(),
                            email_address=user_to_update.email,
                            last_name=user_to_update.lastname.capitalize())
-        
+        # password
+        current_password = request.form.get("current_pass").strip()
+        new_password = request.form.get("new_pass").strip()
+        confirmation_password = request.form.get("confirm_pass").strip()
+        if current_password and new_password and confirmation_password:
+            from dishcovery import bcrypt
+            hashed_new_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            error_list = []
+            #check the length less then
+            if(len(new_password) < 6):
+                error_list.append("Password length is less then 6 characters!")
+            #check the cuurent password is right
+            if not current_user.check_password(current_password):
+                error_list.append("Current password is wrong!")
             
+            #check the new password and its confirmation is right
+            if not bcrypt.check_password_hash(hashed_new_password, confirmation_password):
+                error_list.append("Password and confirmation password doesn't match")
+            if error_list != []:
+                for error_message in error_list:
+                    flash(f"{error_message}", category='danger')
+                return render_template('settings.html',
+                           message="message4",
+                           first_name=current_user.firstname.capitalize(),
+                           email_address=current_user.email,
+                           last_name=current_user.lastname.capitalize())
+                
+            current_user.password = new_password
+            db_storage.save()
+            flash("Email address changed successfully!", category='success')
+            return render_template('settings.html',
+                           message="message4",
+                           first_name=current_user.firstname.capitalize(),
+                           email_address=current_user.email,
+                           last_name=current_user.lastname.capitalize())
             
     return render_template('settings.html',
                            message="message1",
-                           first_name=first_name.capitalize(),
-                           email_address=email_address,
-                           last_name=last_name.capitalize())
+                           first_name=current_user.firstname.capitalize(),
+                           email_address=current_user.email,
+                           last_name=current_user.lastname.capitalize())
 
 
 @app.route("/logout", strict_slashes=False)

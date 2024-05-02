@@ -51,7 +51,8 @@ body {
 	font-weight: 600;
 	
 }
-.content input[type="text"]{
+.content input[type="text"],
+.content input[type="password"]{
 	width:100%;
 	box-shadow: 1px 2px 7px rgba(0, 0, 0, .06);
 	border:1px solid #e1e1e1;
