@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, Response
 from dishcovery import app, recipeData, recipeDetails
 import requests
 import os
@@ -9,19 +9,25 @@ from flask_login import login_user, logout_user, login_required, current_user
 import json
 import signal
 
-@app.route("/login", strict_slashes=False, methods=['POST','GET'])
+
+@app.route("/login", strict_slashes=False, methods=['POST', 'GET'])
 def login_route():
     """Serves Login Page"""
     form = LoginForm()
     if form.validate_on_submit():
-        attempted_user = db_storage.getSession().query(User).filter_by(email=form.email_address.data).first()
-        if attempted_user and attempted_user.check_password(
-            attempted_password=form.password1.data):
+        attempted_user = db_storage\
+                                    .getSession().query(User).filter_by(
+                                        email=form.email_address.data).first()
+        if attempted_user and (
+                                attempted_user.check_password(
+                                    attempted_password=form.password1.data)):
             login_user(attempted_user)
-            # flash(f'Success! You are logged in as: {attempted_user.full_name()}', category='success')
+            # flash(f'Success! You are logged in as: {attempted_user.full_name(
+            # )}', category='success')
             return redirect(url_for('recipe_finder'))
         else:
-            flash('Username and password are not match! Please try again', category='danger')
+            flash('Username and password are not match! Please try again',
+                  category='danger')
     return render_template('login.html', form=form)
 
 
@@ -38,7 +44,8 @@ def register_route():
                               )
         db_storage.new(user_to_create)
         db_storage.save()
-        flash(f"User {user_to_create.full_name()} created successfully! please sign in to access the app", category="info")
+        flash(f"User {user_to_create.full_name()} created successfully! please\
+sign in to access the app", category="info")
         # redirect the user to the specific route using redirect and url_for
         return redirect(url_for('login_route'))
     if form.errors != {}:
@@ -79,17 +86,14 @@ def recipe_finder():
 def bookmark_route():
     """ Serves the bookmarks page """
     bookmarks = current_user.bookmarks
-    print("bookmarks", bookmarks)
-    if len(bookmarks):
-        bookmark_details = bookmarks
+    # print("bookmarks", bookmarks)
+    if bookmarks != []:
+        return render_template('bookmarks.html', bookmark_details=bookmarks)
     else:
-        bookmark_details = "No details found."
-    # print("Bookmark details: ", bookmark_details)
-    
-    return render_template('bookmarks.html', bookmark_details=bookmark_details)
+        return render_template('bookmarks_not_found.html')
 
 
-@app.route("/save_bookmarks", strict_slashes=False, methods=['POST'])
+@app.route("/save_bookmark", strict_slashes=False, methods=['POST'])
 @login_required
 def save_bookmark_route():
     """Saves bookmark if it is not saved alread"""
@@ -102,38 +106,86 @@ def save_bookmark_route():
     total_time = bookmark_details.get("total_time")
     link = bookmark_details.get("link")
     tags = bookmark_details.get("tags")
-    
+
     ingredients_str = json.dumps(ingredients)
     tags_str = json.dumps(tags)
-    
+
     bookmark_details["ingredients"] = ingredients_str
     bookmark_details["tags"] = tags_str
     bookmark_details["user_id"] = current_user.id
 
-    print( "user_id: ",current_user.id, bookmark_details["user_id"])
-    
-    # print("type bookmark_details: ", type(bookmark_details))
-    print("type bookmark_details['ingredients']: ", ingredients)
-    print("type bookmark_details['ingredients'] dumps : ", ingredients_str)
-    print("type bookmark_details['ingredients'] dumps type : ", type(ingredients_str))
-    
-    if len(recipeDetails):
-        recipeDetails.clear()
-    recipeDetails.append(bookmark_details)
     # bookmark = Bookmark(bookmark_details["user_id"])
-    bookmark = Bookmark(label=label,
-                    source=source,
-                    image_link=image_link,
-                    ingredients=ingredients_str,
-                    total_time=total_time,
-                    calories=calories,
-                    link=link,
-                    tags=tags,
-                    user_id=current_user.id)  # Assuming current_user has an id attribute
+    bookmark = Bookmark(
+        label=label,
+        source=source,
+        image_link=image_link,
+        ingredients=ingredients_str,
+        total_time=total_time,
+        calories=calories,
+        link=link,
+        tags=tags,
+        user_id=current_user.id
+        )
     bookmark.save()
-    
+    response = json.dumps({"message": "Bookmark saved."})
+    response = Response(
+        response=response, status=200, mimetype="application/json")
+    return response
 
-    return redirect(url_for('bookmark_route'))
+
+@app.route("/get_bookmark", strict_slashes=False, methods=['POST'])
+@login_required
+def get_bookmark_route():
+    """Returns bookmark from DB using its ID"""
+    bookmark_id = request.get_json()
+    # print(bookmark_id)
+
+    bookmark = db_storage.getSession().query(Bookmark).filter_by(
+        id=bookmark_id.get("recipeId")).first()
+    bookmarkJSON = json.dumps(bookmark.to_dict())
+    print(type(bookmarkJSON))
+    response = Response(
+        response=bookmarkJSON, status=200, mimetype="application/json")
+    return response
+
+
+@app.route("/get_recipe", strict_slashes=False, methods=['POST'])
+@login_required
+def get_recipe_route():
+    """Returns recipe from API call using its index"""
+    recipe = request.get_json()
+    print(recipe)
+    recipe_index = int(recipe.get("recipeId"))
+    print((recipe_index))
+    print(type(recipe_index))
+
+    if recipeDetails != []:
+        recipe_hit = recipeDetails[0][recipe_index].get("recipe")
+        recipeJSON = json.dumps(recipe_hit)
+    else:
+        recipeJSON = json.dumps({})
+    response = Response(
+        response=recipeJSON, status=200, mimetype="application/json")
+    return response
+
+
+@app.route("/delete_bookmark", strict_slashes=False, methods=['POST'])
+@login_required
+def delete_bookmark_route():
+    """Deletes a bookmark from DB using its ID"""
+    bookmark_id = request.get_json()
+    # print("bookmark_id" ,bookmark_id)
+
+    bookmark = db_storage.getSession().query(Bookmark).filter_by(
+        id=bookmark_id.get("recipeId")).first()
+    # print("bookmark obj to delete: ", type(bookmark))
+    bookmark.delete()
+    db_storage.save()
+
+    response = json.dumps({"message": "Deleted Bookmark."})
+    response = Response(
+        response=response, status=200, mimetype="application/json")
+    return response
 
 
 @app.route("/settings", strict_slashes=False)
@@ -202,6 +254,8 @@ def result_route():
         if recipe_details:  # check if recipe_details is not None
             hits = recipe_details["hits"]
             writeResponse(recipe_details)  # Writes response to a JSON file
+            recipeDetails.clear()
+            recipeDetails.append(hits)
         else:
             print("Request returned NULL")
 
@@ -211,8 +265,7 @@ def result_route():
     else:  # Serves recipe_not_found page if no hits found with redirect option
         print("Not Hits found")
         return render_template('recipe_not_found.html')
-
-###################### NON Route methods ############################
+# -------------------------- NON Route methods --------------------------
 
 
 def findRecipe(recipeParam):

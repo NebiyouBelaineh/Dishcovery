@@ -11,7 +11,7 @@ class Bookmark(BaseModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
     
-    label = Column(String(60), nullable=True)
+    label = Column(Text, nullable=True)
     source = Column(String(60), nullable=True)
     image_link = Column(Text, nullable=True)
     ingredients = Column(Text, nullable=True)  # imported from a list

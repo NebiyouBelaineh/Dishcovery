@@ -4,7 +4,7 @@ block styles%}
 <link rel="stylesheet" href="../static/styles/bookmarks.css" />
 
 {% endblock%} {% block script %}
-<script src="../static/scripts/showModal.js"></script>
+<script src="../static/scripts/showModalBookmark.js"></script>
 {% endblock %} {% block main %}
 
 <!-- ----------------Modal-------------------	 -->
@@ -70,7 +70,7 @@ block styles%}
       </div>
       <div class="modale-footer">
         <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-        <button id="bookmark-btn" type="button" class="btn btn-primary btn-book">Bookmark</button>
+        <button id="bookmark-btn" type="button" class="btn btn-primary btn-book">Remove Bookmark</button>
       </div>
     </div>
   </div>
@@ -83,7 +83,7 @@ block styles%}
     <div class="row gx-5 gy-5 justify-content-center">
       {% for bookmark in bookmark_details %}
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-custom card-container">
-        <div class="card shadow" style="width: 18rem">
+        <div id="{{ bookmark.id }}" class="card shadow" style="width: 18rem">
           <a
             class="recipe-link"
             href=""

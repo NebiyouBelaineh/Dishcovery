@@ -85,6 +85,7 @@ block styles%}
             style="text-decoration: none; color: #000"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
+            id="{{ loop.index0 }}"
           >
             <img src="{{ recipe.get("recipe").get("image")}}"
             class="card-img-top" alt="recipe-img">
