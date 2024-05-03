@@ -18,7 +18,7 @@ def login_route():
         attempted_user = db_storage.getSession().query(User).filter_by(email=form.email_address.data).first()
         if attempted_user and attempted_user.check_password(
             attempted_password=form.password1.data):
-            login_user(attempted_user)
+            login_user(attempted_user, remember=True)
             # flash(f'Success! You are logged in as: {attempted_user.full_name()}', category='success')
             return redirect(url_for('recipe_finder'))
         else:
