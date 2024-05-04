@@ -178,19 +178,18 @@ def check_bookmark_route():
 
     bookmark = db_storage.getSession().query(Bookmark).filter_by(
         link=bookmark_link).first()
-    print("bookmark", (bookmark))
-    print("bookmark", type(bookmark))
+    # print("bookmark", (bookmark))
+    # print("bookmark", type(bookmark))
     if bookmark is None:
-        status = { "message": "Not Found"}
+        status = {"message": "Not Found"}
     else:
-        status = { "message": "Found"}
+        status = {"message": "Found"}
     bookmark_status = json.dumps(status)
     print("bookmark_status: ", bookmark_status)
     print("bookmark_status type: ", type(bookmark_status))
     response = Response(
         response=bookmark_status, status=200, mimetype="application/json")
     return response
-    
 
 
 @app.route("/delete_bookmark", strict_slashes=False, methods=['POST'])
@@ -260,7 +259,7 @@ def search_route():
         recipeData.pop()
 
     if recipe_query:
-        print(recipe_query)
+        # print(recipe_query)
         recipeData.append(recipe_query)
 
     print("recipeData: ", recipeData[0])

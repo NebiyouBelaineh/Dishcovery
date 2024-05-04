@@ -169,7 +169,7 @@ $(function () {
       })
       .then((response) => {
         console.log(response.message);
-        location.reload();
+        window.location.reload();
       })
       .catch((error) => {
         // Handle errors
