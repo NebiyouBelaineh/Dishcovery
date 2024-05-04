@@ -152,7 +152,7 @@ $(function () {
     };
     const recipeJSON = JSON.stringify(recipeInfo);
 
-    // Sends the recipe details to save them as bookmark
+    // Sends the recipe details to remove them as bookmark
     fetch('/delete_bookmark', {
       method: 'POST',
       headers: {

@@ -123,7 +123,7 @@ def save_bookmark_route():
         total_time=total_time,
         calories=calories,
         link=link,
-        tags=tags,
+        tags=tags_str,
         user_id=current_user.id
         )
     bookmark.save()
@@ -167,6 +167,30 @@ def get_recipe_route():
     response = Response(
         response=recipeJSON, status=200, mimetype="application/json")
     return response
+
+
+@app.route("/check_bookmark", strict_slashes=False, methods=['POST'])
+@login_required
+def check_bookmark_route():
+    """Checks if recipe is bookmarked from DB using its link"""
+    bookmark_link = request.get_json().get("link")
+    print(bookmark_link, type(bookmark_link))
+
+    bookmark = db_storage.getSession().query(Bookmark).filter_by(
+        link=bookmark_link).first()
+    print("bookmark", (bookmark))
+    print("bookmark", type(bookmark))
+    if bookmark is None:
+        status = { "message": "Not Found"}
+    else:
+        status = { "message": "Found"}
+    bookmark_status = json.dumps(status)
+    print("bookmark_status: ", bookmark_status)
+    print("bookmark_status type: ", type(bookmark_status))
+    response = Response(
+        response=bookmark_status, status=200, mimetype="application/json")
+    return response
+    
 
 
 @app.route("/delete_bookmark", strict_slashes=False, methods=['POST'])
