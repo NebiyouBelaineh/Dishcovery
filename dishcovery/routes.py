@@ -1,33 +1,32 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, Response
 from dishcovery import app, recipeData, recipeDetails
 import requests
 import os
 from dishcovery.forms import RegisterForm, LoginForm
-from dishcovery.models import User
+from dishcovery.models import User, Bookmark
 from dishcovery.models import db_storage
 from flask_login import login_user, logout_user, login_required, current_user
 import json
 import signal
 import re
 
-@app.route("/login", strict_slashes=False, methods=['POST','GET'])
+
+@app.route("/login", strict_slashes=False, methods=['POST', 'GET'])
 def login_route():
     """Serves Login Page"""
     form = LoginForm()
     if form.validate_on_submit():
-        attempted_user = db_storage.getSession().query(User).filter_by(email=form.email_address.data).first()
+        attempted_user = db_storage.getSession().query(User).filter_by(
+            email=form.email_address.data).first()
         if attempted_user and attempted_user.check_password(
-            attempted_password=form.password1.data):
-            login_user(attempted_user, remember=True)
-            # flash(f'Success! You are logged in as: {attempted_user.full_name()}', category='success')
+                attempted_password=form.password1.data):
+            login_user(attempted_user)
+            # flash(f'Success! You are logged in as:
+            # {attempted_user.full_name()}', category='success')
             return redirect(url_for('recipe_finder'))
         else:
-            flash('Username and password are not match! Please try again', category='danger')
-    if form.errors != {}:
-        print(form.errors)
-        for err_msg in form.errors.values():
-            flash(f'{err_msg}', category="danger")
-        
+            flash('Username and password are not match! Please try again',
+                  category='danger')
     return render_template('login.html', form=form)
 
 
@@ -44,7 +43,8 @@ def register_route():
                               )
         db_storage.new(user_to_create)
         db_storage.save()
-        flash(f"User {user_to_create.full_name()} created successfully! please sign in to access the app", category="info")
+        flash(f"User {user_to_create.full_name()} created successfully! please\
+sign in to access the app", category="info")
         # redirect the user to the specific route using redirect and url_for
         return redirect(url_for('login_route'))
     if form.errors != {}:
@@ -85,10 +85,133 @@ def recipe_finder():
 @login_required
 def bookmark_route():
     """ Serves the bookmarks page """
-    return render_template('bookmarks.html')
+    bookmarks = current_user.bookmarks
+    # print("bookmarks", bookmarks)
+    if bookmarks != []:
+        return render_template('bookmarks.html', bookmark_details=bookmarks)
+    else:
+        return render_template('bookmarks_not_found.html')
 
 
-@app.route("/settings", strict_slashes=False, methods=["GET","POST"])
+@app.route("/save_bookmark", strict_slashes=False, methods=['POST'])
+@login_required
+def save_bookmark_route():
+    """Saves bookmark if it is not saved alread"""
+    bookmark_details = request.get_json()
+    label = bookmark_details.get("label")
+    source = bookmark_details.get("source")
+    image_link = bookmark_details.get("img")
+    ingredients = bookmark_details.get("ingredients")
+    calories = bookmark_details.get("calories")
+    total_time = bookmark_details.get("total_time")
+    link = bookmark_details.get("link")
+    tags = bookmark_details.get("tags")
+
+    ingredients_str = json.dumps(ingredients)
+    tags_str = json.dumps(tags)
+
+    bookmark_details["ingredients"] = ingredients_str
+    bookmark_details["tags"] = tags_str
+    bookmark_details["user_id"] = current_user.id
+
+    # bookmark = Bookmark(bookmark_details["user_id"])
+    bookmark = Bookmark(
+        label=label,
+        source=source,
+        image_link=image_link,
+        ingredients=ingredients_str,
+        total_time=total_time,
+        calories=calories,
+        link=link,
+        tags=tags_str,
+        user_id=current_user.id
+        )
+    bookmark.save()
+    response = json.dumps({"message": "Bookmark saved."})
+    response = Response(
+        response=response, status=200, mimetype="application/json")
+    return response
+
+
+@app.route("/get_bookmark", strict_slashes=False, methods=['POST'])
+@login_required
+def get_bookmark_route():
+    """Returns bookmark from DB using its ID"""
+    bookmark_id = request.get_json()
+    # print(bookmark_id)
+
+    bookmark = db_storage.getSession().query(Bookmark).filter_by(
+        id=bookmark_id.get("recipeId")).first()
+    bookmarkJSON = json.dumps(bookmark.to_dict())
+    print(type(bookmarkJSON))
+    response = Response(
+        response=bookmarkJSON, status=200, mimetype="application/json")
+    return response
+
+
+@app.route("/get_recipe", strict_slashes=False, methods=['POST'])
+@login_required
+def get_recipe_route():
+    """Returns recipe from API call using its index"""
+    recipe = request.get_json()
+    print(recipe)
+    recipe_index = int(recipe.get("recipeId"))
+    print((recipe_index))
+    print(type(recipe_index))
+
+    if recipeDetails != []:
+        recipe_hit = recipeDetails[0][recipe_index].get("recipe")
+        recipeJSON = json.dumps(recipe_hit)
+    else:
+        recipeJSON = json.dumps({})
+    response = Response(
+        response=recipeJSON, status=200, mimetype="application/json")
+    return response
+
+
+@app.route("/check_bookmark", strict_slashes=False, methods=['POST'])
+@login_required
+def check_bookmark_route():
+    """Checks if recipe is bookmarked from DB using its link"""
+    bookmark_link = request.get_json().get("link")
+    print(bookmark_link, type(bookmark_link))
+
+    bookmark = db_storage.getSession().query(Bookmark).filter_by(
+        link=bookmark_link).first()
+    # print("bookmark", (bookmark))
+    # print("bookmark", type(bookmark))
+    if bookmark is None:
+        status = {"message": "Not Found"}
+    else:
+        status = {"message": "Found"}
+    bookmark_status = json.dumps(status)
+    print("bookmark_status: ", bookmark_status)
+    print("bookmark_status type: ", type(bookmark_status))
+    response = Response(
+        response=bookmark_status, status=200, mimetype="application/json")
+    return response
+
+
+@app.route("/delete_bookmark", strict_slashes=False, methods=['POST'])
+@login_required
+def delete_bookmark_route():
+    """Deletes a bookmark from DB using its ID"""
+    bookmark_id = request.get_json()
+    # print("bookmark_id" ,bookmark_id)
+
+    bookmark = db_storage.getSession().query(Bookmark).filter_by(
+        id=bookmark_id.get("recipeId")).first()
+    # print("bookmark obj to delete: ", type(bookmark))
+    bookmark.delete()
+    db_storage.save()
+
+    response = json.dumps({"message": "Deleted Bookmark."})
+    response = Response(
+        response=response, status=200, mimetype="application/json")
+    return response
+
+
+@app.route("/settings", strict_slashes=False, methods=["GET", "POST"])
 @login_required
 def settings_route():
     """ Serves the settings page """
@@ -96,92 +219,110 @@ def settings_route():
         # First name
         name = request.form.get("first_name").strip()
         if name:
-            user_to_update = db_storage.getSession().query(User).get(current_user.id)
+            user_to_update = db_storage.getSession().query(User).get(
+                current_user.id)
             user_to_update.firstname = name
             db_storage.save()
             flash("First name changed successfully!", category='success')
-            return render_template('settings.html',
-                           message="message1",
-                           first_name=user_to_update.firstname.capitalize(),
-                           email_address=user_to_update.email,
-                           last_name=user_to_update.lastname.capitalize())
-        #Last name
+            return render_template(
+                'settings.html',
+                message="message1",
+                first_name=user_to_update.firstname.capitalize(),
+                email_address=user_to_update.email,
+                last_name=user_to_update.lastname.capitalize())
+        # Last name
         last_name = request.form.get("last_name").strip()
         if last_name:
-            user_to_update = db_storage.getSession().query(User).get(current_user.id)
+            user_to_update = db_storage.getSession().query(User).get(
+                current_user.id)
             user_to_update.lastname = last_name
             db_storage.save()
             flash("Last name changed successfully!", category='success')
-            return render_template('settings.html',
-                           message="message2",
-                           first_name=user_to_update.firstname.capitalize(),
-                           email_address=user_to_update.email,
-                           last_name=user_to_update.lastname.capitalize())
-        #Email Address
+            return render_template(
+                'settings.html',
+                message="message2",
+                first_name=user_to_update.firstname.capitalize(),
+                email_address=user_to_update.email,
+                last_name=user_to_update.lastname.capitalize())
+
+        # Email Address
         email_address = request.form.get("email_address").strip()
         if email_address:
-            user_to_update = db_storage.getSession().query(User).get(current_user.id)
+            user_to_update = db_storage.getSession().query(User).get(
+                current_user.id)
             # check if valid email
             if not is_valid_email(email_address):
                 flash("Email is not valid!", category='danger')
-                return render_template('settings.html',
-                           message="message3",
-                           first_name=user_to_update.firstname.capitalize(),
-                           email_address=user_to_update.email,
-                           last_name=user_to_update.lastname.capitalize())
+                return render_template(
+                    'settings.html',
+                    message="message3",
+                    first_name=user_to_update.firstname.capitalize(),
+                    email_address=user_to_update.email,
+                    last_name=user_to_update.lastname.capitalize())
             # check if email doesnt exist in the database
             if exist_email_address(email_address):
-                flash("Email address already exists! Please try different email address", category='danger')
-                return render_template('settings.html',
-                           message="message3",
-                           first_name=user_to_update.firstname.capitalize(),
-                           email_address=user_to_update.email,
-                           last_name=user_to_update.lastname.capitalize())
-                
+                flash("Email address already exists!\
+Please try different email address", category='danger')
+                return render_template(
+                    'settings.html',
+                    message="message3",
+                    first_name=user_to_update.firstname.capitalize(),
+                    email_address=user_to_update.email,
+                    last_name=user_to_update.lastname.capitalize())
+
             user_to_update.email = email_address
             db_storage.save()
             flash("Email address changed successfully!", category='success')
-            return render_template('settings.html',
-                           message="message3",
-                           first_name=user_to_update.firstname.capitalize(),
-                           email_address=user_to_update.email,
-                           last_name=user_to_update.lastname.capitalize())
+            return render_template(
+                'settings.html',
+                message="message3",
+                first_name=user_to_update.firstname.capitalize(),
+                email_address=user_to_update.email,
+                last_name=user_to_update.lastname.capitalize())
         # password
         current_password = request.form.get("current_pass").strip()
         new_password = request.form.get("new_pass").strip()
         confirmation_password = request.form.get("confirm_pass").strip()
         if current_password and new_password and confirmation_password:
             from dishcovery import bcrypt
-            hashed_new_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            hashed_new_password = bcrypt.generate_password_hash(
+                                                                new_password
+                                                                ).decode(
+                                                                    'utf-8')
             error_list = []
-            #check the length less then
-            if(len(new_password) < 6):
+
+            # check the length less then
+            if (len(new_password) < 6):
                 error_list.append("Password length is less then 6 characters!")
-            #check the cuurent password is right
+            # check the cuurent password is right
             if not current_user.check_password(current_password):
                 error_list.append("Current password is wrong!")
-            
-            #check the new password and its confirmation is right
-            if not bcrypt.check_password_hash(hashed_new_password, confirmation_password):
-                error_list.append("Password and confirmation password doesn't match")
+
+            # check the new password and its confirmation is right
+            if not bcrypt.check_password_hash(hashed_new_password,
+                                              confirmation_password):
+                error_list.append(
+                    "Password and confirmation password doesn't match")
             if error_list != []:
                 for error_message in error_list:
                     flash(f"{error_message}", category='danger')
-                return render_template('settings.html',
-                           message="message4",
-                           first_name=current_user.firstname.capitalize(),
-                           email_address=current_user.email,
-                           last_name=current_user.lastname.capitalize())
-                
+                return render_template(
+                    'settings.html',
+                    message="message4",
+                    first_name=current_user.firstname.capitalize(),
+                    email_address=current_user.email,
+                    last_name=current_user.lastname.capitalize())
+
             current_user.password = new_password
             db_storage.save()
             flash("Email address changed successfully!", category='success')
-            return render_template('settings.html',
-                           message="message4",
-                           first_name=current_user.firstname.capitalize(),
-                           email_address=current_user.email,
-                           last_name=current_user.lastname.capitalize())
-            
+            return render_template(
+                'settings.html',
+                message="message4",
+                first_name=current_user.firstname.capitalize(),
+                email_address=current_user.email,
+                last_name=current_user.lastname.capitalize())
+
     return render_template('settings.html',
                            message="message1",
                            first_name=current_user.firstname.capitalize(),
@@ -228,13 +369,13 @@ def search_route():
     # and empties it if new query is made
     if len(recipeData) and recipe_query != "":
         recipeData.pop()
-        # recipeDetails = {}
+
     if recipe_query:
-        print(recipe_query)
+        # print(recipe_query)
         recipeData.append(recipe_query)
 
     print("recipeData: ", recipeData[0])
-    return redirect(url_for('result_route', recipe_details=recipe_query))
+    return redirect(url_for('result_route'))
 
 
 @app.route("/results", strict_slashes=False)
@@ -244,10 +385,12 @@ def result_route():
     hits = []
     if len(recipeData):
         # calls method to handle api call if request is not present
-        recipeDetails = findRecipe(recipeData[0])
-        if recipeDetails:  # check if recipeDetails is not None
-            hits = recipeDetails["hits"]
-            writeResponse(recipeDetails)  # Writes response to a JSON file
+        recipe_details = findRecipe(recipeData[0])
+        if recipe_details:  # check if recipe_details is not None
+            hits = recipe_details["hits"]
+            writeResponse(recipe_details)  # Writes response to a JSON file
+            recipeDetails.clear()
+            recipeDetails.append(hits)
         else:
             print("Request returned NULL")
 
@@ -257,6 +400,7 @@ def result_route():
     else:  # Serves recipe_not_found page if no hits found with redirect option
         print("Not Hits found")
         return render_template('recipe_not_found.html')
+# -------------------------- NON Route methods --------------------------
 
 
 def findRecipe(recipeParam):
@@ -274,9 +418,9 @@ app_id={api_id}&app_key={api_key}&q={recipeParam}"
     try:
         result = response.json()
         # print(result)
-        if len(recipeDetails):
-            recipeDetails.pop()
-            recipeDetails.append(result)
+        # if len(recipeDetails):
+        #     recipeDetails.pop()
+        #     recipeDetails.append(result)
         return result
     except (KeyError, TypeError, ValueError):
         return None
@@ -319,25 +463,28 @@ signal.signal(signal.SIGINT, signal_handler)
 def is_valid_email(email):
     """
     Check if a string is a valid email address.
-    
+
     Args:
         email (str): The string to be checked.
-    
+
     Returns:
         bool: True if the email is valid, False otherwise.
     """
     # Regular expression pattern for validating email addresses
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    
+
     # Use re.match to search the pattern at the beginning of the string
     if re.match(pattern, email):
         return True
     else:
         return False
 
+
 def exist_email_address(email_to_check):
-        user = db_storage.getSession().query(User).filter_by(email=email_to_check).first()
-        if user:
-            return True
-        else:
-            return False
+    user = db_storage.getSession().query(User).filter_by(
+                                                        email=email_to_check
+                                                        ).first()
+    if user:
+        return True
+    else:
+        return False

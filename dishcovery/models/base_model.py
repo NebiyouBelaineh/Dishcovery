@@ -60,8 +60,8 @@ class BaseModel(Base):
     def save(self):
         """updates the attribute 'updated_at' with the current datetime"""
         self.updated_at = datetime.utcnow()
-        models.storage.new(self)
-        models.storage.save()
+        models.db_storage.new(self)
+        models.db_storage.save()
 
     def to_dict(self, save_fs=None):
         """returns a dictionary containing all keys/values of the instance"""
@@ -79,5 +79,5 @@ class BaseModel(Base):
         return new_dict
 
     def delete(self):
-        """delete the current instance from the storage"""
-        models.storage.delete(self)
+        """delete the current instance from the db_storage"""
+        models.db_storage.delete(self)
