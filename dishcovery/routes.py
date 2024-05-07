@@ -27,6 +27,10 @@ def login_route():
         else:
             flash('Username and password are not match! Please try again',
                   category='danger')
+    if form.errors != {}:
+        print(form.errors)
+        for err_msg in form.errors.values():
+            flash(f'{err_msg}', category="danger")
     return render_template('login.html', form=form)
 
 
@@ -62,7 +66,6 @@ def home_route():
 
 
 @app.route("/recipe_finder", strict_slashes=False)
-@login_required
 def recipe_finder():
     """ Serves the recipe finder page """
     cuisine_types = ['(Default) - Any', 'American', 'Asian', 'British',
@@ -150,7 +153,6 @@ def get_bookmark_route():
 
 
 @app.route("/get_recipe", strict_slashes=False, methods=['POST'])
-@login_required
 def get_recipe_route():
     """Returns recipe from API call using its index"""
     recipe = request.get_json()
@@ -340,7 +342,6 @@ def logout_route():
 
 
 @app.route("/search", strict_slashes=False, methods=['POST'])
-@login_required
 def search_route():
     """ Search for recipe """
     ingredients = request.get_json()['ingredients']
@@ -379,7 +380,6 @@ def search_route():
 
 
 @app.route("/results", strict_slashes=False)
-@login_required
 def result_route():
     """ Shows results for recipe """
     hits = []
@@ -437,6 +437,7 @@ def writeResponse(response):
 
 
 def delete_file():
+    """Delete the file"""
     # Define the path of the file to be removed
     file_path = 'dishcovery/static/data/tmp/response.json'
     # Check if the file exists before trying to remove it
@@ -446,6 +447,7 @@ def delete_file():
 
 
 def signal_handler(signum, frame):
+    """Signal hanler"""
     # Call delete_file function before exiting
     try:
         delete_file()
@@ -481,6 +483,7 @@ def is_valid_email(email):
 
 
 def exist_email_address(email_to_check):
+    """Check if the email address exists"""
     user = db_storage.getSession().query(User).filter_by(
                                                         email=email_to_check
                                                         ).first()

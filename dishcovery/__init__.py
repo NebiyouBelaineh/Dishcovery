@@ -14,7 +14,7 @@ enable this after creating tables;
 
 app = Flask(__name__)
 # is a security shield for displaying the form
-app.config["SECRET_KEY"]=environ.get("DISHCOVERY_SECRET_KEY")
+app.config["SECRET_KEY"] = environ.get("DISHCOVERY_SECRET_KEY")
 # an empty list to hold recipe find queries
 recipeData = []
 # an empty list to hold recipe api response
