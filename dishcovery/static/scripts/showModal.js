@@ -21,7 +21,11 @@ $(function () {
 
   // document.getElementById("pdf-btn").addEventListener("click", saveToPDF);
   $('#pdf-btn').click(function () {
-    $('#modal-section').printThis();
+    // console.log("Download as PDF clicked!")
+    $('.main-logo, .right-section, .recipe-img').printThis({
+      footer: "<h6 style='font-family: cursive;'>Powered by <span style='color: #F2613F'>DishCovery</span></h6>",
+      pageTitle: 'DishCovery'
+    });
   });
 
   function populateModal (event) {
@@ -106,6 +110,8 @@ $(function () {
               healthLabels.appendChild(span);
             });
           }
+          const ingredientLines = document.querySelector('.ingredientLines');
+          ingredientLines.innerHTML = '';
 
           const ingDiv = document.createElement('div');
           const ul = document.createElement('ul');
@@ -119,7 +125,7 @@ $(function () {
             ul.appendChild(li);
           });
           ingDiv.appendChild(ul);
-          document.querySelector('.ingredient').appendChild(ingDiv);
+          ingredientLines.appendChild(ingDiv);
           const recipeLink = {
             link: recipeContent.link
           };

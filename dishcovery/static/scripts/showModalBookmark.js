@@ -6,6 +6,26 @@ $(function () {
   let isBookmarked = true;
   let bookmarkID = '';
 
+  const cursorTag = document.querySelector('#showTags');
+  cursorTag.addEventListener('click', function (e) {
+    if (this.children[0].getAttribute('name') === 'chevron-up-outline') {
+      this.children[0].setAttribute('name', 'chevron-down-outline');
+    } else {
+      this.children[0].setAttribute('name', 'chevron-up-outline');
+    }
+  });
+  $('#tagsContent').hide();
+  $('#showTags').click(function () {
+    $('#tagsContent').slideToggle(300);
+  });
+
+  $('#pdf-btn').click(function () {
+    // console.log("Download as PDF clicked!")
+    $('.main-logo, .right-section, .recipe-img').printThis({
+      footer: "<h6 style='font-family: cursive;'>Powered by <span style='color: #F2613F'>DishCovery</span></h6>",
+      pageTitle: 'DishCovery'
+    });
+  });
   function populateModal () {
     console.log('Recipe linked clicked, Modal Open!');
 
@@ -73,6 +93,8 @@ $(function () {
             healthLabels.appendChild(span);
           });
         }
+        const ingredientLines = document.querySelector('.ingredientLines');
+        ingredientLines.innerHTML = '';
 
         const ingDiv = document.createElement('div');
         const ul = document.createElement('ul');
@@ -88,7 +110,7 @@ $(function () {
           ul.appendChild(li);
         });
         ingDiv.appendChild(ul);
-        document.querySelector('.ingredient').appendChild(ingDiv);
+        ingredientLines.appendChild(ingDiv);
       })
       .catch((error) => {
         // Handle errors
