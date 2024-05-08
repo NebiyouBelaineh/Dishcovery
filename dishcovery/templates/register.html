@@ -12,7 +12,7 @@
 		{% endif %}
 	{% endwith %}
 	  <main class="form-signin">
-		<form method="POST" action="/register">
+		<form method="POST" action="/register" novalidate>
 			<!-- ---protect from cros forgery attacks--- -->
 			{{ form.hidden_tag() }}
 		  

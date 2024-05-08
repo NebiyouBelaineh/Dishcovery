@@ -24,4 +24,5 @@ class Recipe(BaseModel):
 
     # bookmark = relationship('Bookmark', back_populates='recipe',
     # uselist=False)
-    recipe_owner = relationship("User", backref='recipes')  # One-to-Many (reverse relationship)
+    # One-to-Many (reverse relationship)
+    recipe_owner = relationship("User", backref='recipes')

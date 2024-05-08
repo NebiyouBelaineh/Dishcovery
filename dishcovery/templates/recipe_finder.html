@@ -15,7 +15,11 @@
       <h1>DishCovery</h1>
     </div>
     <div class="">
+		{% if current_user.is_authenticated %}
       <h3>Hello <span class="badge bg-warning">{{ current_user.full_name() }}</span></h3>
+	  {% else %}
+	  <h3>Hello <span class="badge bg-warning">Dear Visitor</span></h3>
+	  {% endif %}
       <p class="lead">
         Type in or choose the ingredients and meal details you would like to
         have for your next dish.
