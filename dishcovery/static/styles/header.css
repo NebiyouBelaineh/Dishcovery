@@ -21,3 +21,7 @@ header h1 {
 header nav.navbar{
 	background-color: #88ab8e !important;
 }
+.nav-link:hover {
+  background-color: #135D66;
+  border-radius: 5px;
+}

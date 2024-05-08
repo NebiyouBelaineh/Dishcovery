@@ -11,3 +11,38 @@
     font-size: 3.5rem;
   }
 }
+
+p.description {
+  font-family: cursive;
+}
+.bg-one {
+  background-image: url("../images/tamanna-rumee-DoUgSMezLp0-unsplash_rotated.jpg");
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  animation: changeBackground 20s infinite;
+}
+
+/* @keyframes changeBackground {
+  0% { background-image: url('./images/tamanna-rumee-DoUgSMezLp0-unsplash_rotated.jpg'); }
+  50% { background-image: url('../images/ikhsan-baihaqi-RwAXb8Hv_sU-unsplash_rotated.jpg'); }
+  100% { background-image: url('../images/victoria-shes-UC0HZdUitWY-unsplash.jpg'); }
+} */
+.jumbotron-img {
+  height: 500px;
+  width: auto;
+}
+h2 {
+  color: #135D66;
+  padding: 5px;
+}
+.featurette-bg {
+  background-color: hsl(92.4deg 24.17% 86.93%);
+  padding: 20px;
+}
+p.lead {
+  font-size: x-large;
+}
+.btn-jumbotron:hover {
+  background-color: #135D66;
+}

@@ -58,7 +58,7 @@ sign in to access the app", category="info")
 @app.route("/", strict_slashes=False)
 def home_route():
     """ Serves the home page """
-    return render_template('home.html')
+    return render_template('homepage.html')
 
 
 @app.route("/recipe_finder", strict_slashes=False)
