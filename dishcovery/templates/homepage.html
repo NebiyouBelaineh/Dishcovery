@@ -56,15 +56,19 @@
                     <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                         <li class="nav-item">
                             <a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
-                                href="{{ url_for('home_route') }} " style="color: #fff !important">Home</a>
+                                href="{{ url_for('home_route') }} " style="color:#fff !important;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %}"
+                                href="{{ url_for('recipe_finder') }}" style="color:#fff !important;">Recipe Finder</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %}"
-                                href="{{ url_for('login_route') }}" style="color: #fff !important">Login</a>
+                                href="{{ url_for('login_route') }}" style="color:#fff !important;">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}"
-                                href="{{ url_for('register_route') }}" style="color: #fff !important">Register</a>
+                                href="{{ url_for('register_route') }}" style="color:#fff !important;">Register</a>
                         </li>
                     </ul>
                 </div>

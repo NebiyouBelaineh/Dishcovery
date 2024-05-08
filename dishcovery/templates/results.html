@@ -105,6 +105,12 @@ block styles%}
               </h5>
             </div>
           </a>
+          <div class="card-healthLables">
+            {% for i in range(5): %}
+            <span>{{ recipe.get("recipe").get("healthLabels")[i] }}</span>
+            {% endfor %}
+          </div>
+          <i class="fa-regular fa-bookmark"></i>
         </div>
       </div>
       {% endfor %}
