@@ -1,0 +1,107 @@
+.about-section{
+	background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url("../images/about.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	min-height: 100vh;
+	padding-top:80px;
+}
+
+.heading-about{
+	color:#fff;
+	text-align: center;
+	margin-top:50px;
+}
+
+.about-article{
+	color:#fff;
+}
+
+.about-article p{
+	width: 80%;
+	margin:30px auto;
+	text-align: center;
+	font-size:17px;
+}
+
+.card-team{
+	/* border: 1px solid rgba(255, 255, 255, .5);
+	box-shadow: 2px 4px 10px rgba(255, 255, 255, .4); */
+	min-height:800px;
+	border-radius: 30px;
+	overflow: hidden;
+	color:#000;
+	background-color: #fff;
+}
+
+.card-img{
+	margin-bottom:20px;
+}
+.card-name,
+.card-title,
+.card-description{
+	text-align: center;
+	padding-inline: 20px;
+}
+
+.card-title{
+	font-weight: 500;
+}
+.card-socials{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top:20px;
+
+}
+.socials {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.socials li{
+	text-decoration: none;
+	color:#fff;
+	font-size:40px;
+}
+.socials ion-icon{
+	color:#88ab8e;
+}
+.socials ion-icon{
+	color:#88ab8e;
+	transition: color .2s ease;
+}
+.socials ion-icon:hover{
+	color:#839a86;
+}
+
+.card-name{
+	color:#88ab8e;
+	font-size:24px;
+	font-weight: 500;
+}
+
+.card-title{
+	font-size:14px;
+}
+
+.project-title{
+	color:#88ab8e;
+	font-size:18px;
+	margin-top:50px;
+	position:relative;
+	display:inline-block;
+}
+.project-link{
+	text-decoration: none;
+	color:#fff;
+	transition: color .2s ease;
+}
+
+.project-link:hover{
+	color:#88ab8e;
+}

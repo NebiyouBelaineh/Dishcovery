@@ -2,27 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="generator" content="Hugo 0.84.0" />
-    <title>DishCovery Home</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="generator" content="Hugo 0.84.0" />
+	<title>DishCovery Home</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/" />
+	<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/" />
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
 
     <!--Stylesheets-->
-    <link rel="stylesheet" href="../static/styles/header.css" />
-    <link rel="stylesheet" href="../static/styles/footer.css" />
-    <link rel="stylesheet" href="../static/styles/homepage.css" />
+	<link rel="stylesheet" href="../static/styles/header.css" />
+	<link rel="stylesheet" href="../static/styles/footer.css" />
+	<link rel="stylesheet" href="../static/styles/homepage.css" />
+	<link rel="stylesheet" href="../static/styles/about.css" />
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="../static/images/favicon/site.webmanifest" />
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon/apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon/favicon-16x16.png" />
+	<link rel="manifest" href="../static/images/favicon/site.webmanifest" />
 
     <!--carousel-->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -30,47 +31,51 @@
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <!-- Fonts -->
+	<!-- Fonts -->
 
     <style>
     </style>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url_for('home_route') }}"
-                    style="font-size: 37px; color: #fff">DishCovery</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
-                                href="{{ url_for('home_route') }} " style="color:#fff !important;">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %}"
-                                href="{{ url_for('recipe_finder') }}" style="color:#fff !important;">Recipe Finder</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %}"
-                                href="{{ url_for('login_route') }}" style="color:#fff !important;">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}"
-                                href="{{ url_for('register_route') }}" style="color:#fff !important;">Register</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ url_for('home_route') }}"
+					style="font-size: 37px; color: #fff">DishCovery</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
+								href="{{ url_for('home_route') }} " style="color:#fff !important;">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %}"
+								href="{{ url_for('recipe_finder') }}" style="color:#fff !important;">Recipe Finder</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link "
+								href="#about" style="color:#fff !important;">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %}"
+								href="{{ url_for('login_route') }}" style="color:#fff !important;">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}"
+								href="{{ url_for('register_route') }}" style="color:#fff !important;">Register</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<main>
         <div class="container-fluid py-5 jumbotron-text bg-one">
             <h1 class="display-5 fw-bold">Welcome to DishCovery!</h1>
             <p class="col-md-6 fs-4">
@@ -80,22 +85,19 @@
             </p>
             <a href="{{ url_for('recipe_finder') }}">
                 <button class="btn btn-secondary btn-lg btn-jumbotron" type="button">
-                    Try now without Signing-up!
+                    Try it now without Signing-up
                 </button>
             </a>
             <a href="{{ url_for('register_route') }}">
                 <button class="btn btn-secondary btn-lg btn-jumbotron" type="button">
-                    Sign-up
+                    Sign-up now
                 </button>
             </a>
         </div>
-        <div class="container py-4">
-            <!-- <div class="p-5 mb-4 bg-dark text-light bg-one rounded-3">
+		<div class="container py-4">
+			<!-- START THE FEATURETTES -->
 
-            </div> -->
-            <!-- START THE FEATURETTES -->
-
-            <hr class="featurette-divider" />
+			<hr class="featurette-divider" />
 
             <div class="row featurette">
                 <div class="col-md-7 featurette-bg">
@@ -209,51 +211,100 @@
                 </div>
             </div>
 
-            <hr class="featurette-divider" />
+			<hr class="featurette-divider" />
 
-            <div class="row featurette">
-                <div class="col-md-7 featurette-bg">
-                    <h2 class="featurette-heading">
-                        Start Cooking <span class="text-muted">Today!</span>
-                    </h2>
-                    <p class="lead">
-                        Sign up now to unlock the full potential of DishCovery and revolutionize your culinary
-                        experience.
-                    </p>
-                </div>
-                <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                        height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#eee" />
-                        <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-                    </svg>
-                </div>
-            </div>
+			<!-- /END THE FEATURETTES -->
 
-            <hr class="featurette-divider" />
+			
+		</div>
+		<section class="about-section" id="about">
+			<div class="container py-4">
+				<div class="row">
+					<div class="col-md-12" >
+						<h1 class="heading-about">Our Story</h1>
+					</div>
+					<div class="col-md-12 about-article">
+						<p>Welcome to our recipe dishcovery platform!</p>
+						<p>We are a team of passionate developers dedicated to creating innovative solutions for food enthusiasts.</p>
+						<p>Our platform aims to make discovering and saving recipes an enjoyable experience for users of all levels.
+							With a focus on user-centric design and functionality, we strive to provide a seamless and intuitive interface for exploring a wide variety of recipes.
+						</p>
+						<p>
+							Our team brings together expertise in frontend and backend development to deliver a feature-rich and responsive application.
+	From searching for recipes based on specific ingredients or preferences to bookmarking favorite dishes for later, our platform offers a comprehensive suite of features.
+						</p>
+						<p>
+							We are committed to continuously improving and enhancing our platform to meet the evolving needs of our users.
+	Thank you for joining us on this culinary journey, and we hope you find inspiration and delight in discovering new recipes with us!
+						</p>
+					</div>
+				</div>
+				<div class="row justify-content-center" style="gap:50px">
+					<div class="col-md-12" >
+						<h1 class="heading-about">Our Team</h1>
+					</div>
+					<div class="col-12 col-md-6 col-lg-4">
+						<div class="card-team">
+							<img src="../static/images/16514176.jpg" alt="" class="card-img">
+							<div class="card-name">Dridi Chaith</div>
+							<div class="card-title">FullStack developer</div>
+							<div class="card-description">
+								Dridi Chaith, a native of Tunisia, is the creative force behind our recipe discovery platform. With a degree in computer science from ESPRIT, Dridi combines technical expertise with a passion for culinary exploration. In his free time, he enjoys immersing himself in books, indulging in anime, and embarking on hiking adventures.
+							</div>
+							<div class="card-socials">
+								<ul class="socials">
+									<li><a href="https://github.com/sethgreen23" target="_blank"><ion-icon name="logo-github"></ion-icon></a></li>
+									<li><a href="https://twitter.com/dridi_chaith" target="_blank"><ion-icon name="logo-twitter"></ion-icon></a></li>
+									<li><a href="https://www.linkedin.com/in/chaith-dridi/" target="_blank"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-4">
+						<div class="card-team">
+							<img src="../static/images/NebiyouBelaineh.jpg" alt="" class="card-img">
+							<div class="card-name">Nebiyou Belaineh</div>
+							<div class="card-title">FullStack developer</div>
+							<div class="card-description">
+								Nebiyou Belaineh, hailing from Addis Ababa, Ethiopia, brings a wealth of experience to our recipe discovery platform. With a background in Biomedical Engineering and Software Development, Nebiyou is dedicated to delivering innovative solutions and enhancing user experiences. Outside of work, he enjoys competitive programming and gaming.
+							</div>
+							<div class="card-socials">
+								<ul class="socials">
+									<li><a href="https://github.com/NebiyouBelaineh" target="_blank"><ion-icon name="logo-github"></ion-icon></a></li>
+									<li><a href="https://twitter.com/SeifuNebiyou" target="_blank"><ion-icon name="logo-twitter"></ion-icon></a></li>
+									<li><a href="https://www.linkedin.com/in/nebiyou-belaineh-2a683415b/" target="_blank"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="project-title">Project Repository:</h3>
+						<a href="https://github.com/NebiyouBelaineh/Dishcovery" target="_blank" class="project-link">Dishcovery</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 
-            <!-- /END THE FEATURETTES -->
-        </div>
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="home_footer">
-        <p class="mt-5 mb-3 fs-5 font-weight-bold">&copy;DishCovery 2024</p>
-    </footer>
+	<!-- FOOTER -->
+	<footer class="home_footer">
+		<p class="mt-5 mb-3 fs-5 font-weight-bold">&copy;DishCovery 2024</p>
+	</footer>
 
     <!--Script-->
     <script src="../static/scripts/homepage.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
 
     <!--carousel script-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
