@@ -106,7 +106,7 @@ def save_bookmark_route():
     image_link = bookmark_details.get("img")
     ingredients = bookmark_details.get("ingredients")
     calories = bookmark_details.get("calories")
-    total_time = bookmark_details.get("total_time")
+    total_time = bookmark_details.get("totalTime")
     link = bookmark_details.get("link")
     tags = bookmark_details.get("tags")
 
