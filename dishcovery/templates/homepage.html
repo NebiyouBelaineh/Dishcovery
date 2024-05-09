@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="../static/styles/header.css" />
 	<link rel="stylesheet" href="../static/styles/footer.css" />
 	<link rel="stylesheet" href="../static/styles/homepage.css" />
+	<link rel="stylesheet" href="../static/styles/about.css" />
 
 	<!-- Favicons -->
 	<link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon/apple-touch-icon.png" />
@@ -63,8 +64,8 @@
 								href="{{ url_for('recipe_finder') }}" style="color:#fff !important;">Recipe Finder</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-item nav-link {% if request.path == url_for('about_route') %}active{% endif %}"
-								href="{{ url_for('about_route') }} " style="color:#fff !important;">About</a>
+							<a class="nav-item nav-link "
+								href="#about" style="color:#fff !important;">About</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %}"
@@ -197,8 +198,36 @@
 			<hr class="featurette-divider" />
 
 			<!-- /END THE FEATURETTES -->
+
+			
 		</div>
-		</div>
+		<section class="about-section" id="about">
+			<div class="container py-4">
+				<div class="row">
+					<div class="col-md-12" >
+						<h1 class="heading-about">Our Story</h1>
+	
+						
+	
+					</div>
+					<div class="col-md-12 about-article">
+						<p>Welcome to our recipe dishcovery platform!</p>
+						<p>We are a team of passionate developers dedicated to creating innovative solutions for food enthusiasts.</p>
+						<p>Our platform aims to make discovering and saving recipes an enjoyable experience for users of all levels.
+							With a focus on user-centric design and functionality, we strive to provide a seamless and intuitive interface for exploring a wide variety of recipes.
+						</p>
+						<p>
+							Our team brings together expertise in frontend and backend development to deliver a feature-rich and responsive application.
+	From searching for recipes based on specific ingredients or preferences to bookmarking favorite dishes for later, our platform offers a comprehensive suite of features.
+						</p>
+						<p>
+							We are committed to continuously improving and enhancing our platform to meet the evolving needs of our users.
+	Thank you for joining us on this culinary journey, and we hope you find inspiration and delight in discovering new recipes with us!
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
 	</main>
 
 	<!-- FOOTER -->
