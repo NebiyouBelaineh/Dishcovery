@@ -2,208 +2,212 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="generator" content="Hugo 0.84.0" />
-    <title>DishCovery Home</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="generator" content="Hugo 0.84.0" />
+	<title>DishCovery Home</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/" />
+	<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/" />
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
-    <link rel="stylesheet" href="../static/styles/header.css" />
-    <link rel="stylesheet" href="../static/styles/footer.css" />
-    <link rel="stylesheet" href="../static/styles/homepage.css" />
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
+	<link rel="stylesheet" href="../static/styles/header.css" />
+	<link rel="stylesheet" href="../static/styles/footer.css" />
+	<link rel="stylesheet" href="../static/styles/homepage.css" />
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="../static/images/favicon/site.webmanifest" />
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon/apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon/favicon-16x16.png" />
+	<link rel="manifest" href="../static/images/favicon/site.webmanifest" />
 
-    <!-- Fonts -->
+	<!-- Fonts -->
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
+	<style>
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+	</style>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url_for('home_route') }}"
-                    style="font-size: 37px; color: #fff">DishCovery</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
-                                href="{{ url_for('home_route') }} " style="color:#fff !important;">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %}"
-                                href="{{ url_for('recipe_finder') }}" style="color:#fff !important;">Recipe Finder</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %}"
-                                href="{{ url_for('login_route') }}" style="color:#fff !important;">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}"
-                                href="{{ url_for('register_route') }}" style="color:#fff !important;">Register</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <div class="container py-4">
-            <div class="p-5 mb-4 bg-dark text-light bg-one rounded-3">
-                <div class="container-fluid py-5 jumbotron-text">
-                    <h1 class="display-5 fw-bold">Welcome to DishCovery!</h1>
-                    <p class="col-md-6 fs-4">
-                        Are you tired of wondering what to cook for your next meal? Look
-                        no further! DishCovery is here to help you discover delicious
-                        recipes tailored to your preferences.
-                    </p>
-                    <a href="{{ url_for('register_route') }}">
-                        <button class="btn btn-secondary btn-lg btn-jumbotron" type="button">
-                            Sign-up now
-                        </button>
-                    </a>
-                </div>
-            </div>
-            <!-- START THE FEATURETTES -->
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ url_for('home_route') }}"
+					style="font-size: 37px; color: #fff">DishCovery</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
+								href="{{ url_for('home_route') }} " style="color:#fff !important;">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %}"
+								href="{{ url_for('recipe_finder') }}" style="color:#fff !important;">Recipe Finder</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('about_route') %}active{% endif %}"
+								href="{{ url_for('about_route') }} " style="color:#fff !important;">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %}"
+								href="{{ url_for('login_route') }}" style="color:#fff !important;">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}"
+								href="{{ url_for('register_route') }}" style="color:#fff !important;">Register</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<div class="container py-4">
+			<div class="p-5 mb-4 bg-dark text-light bg-one rounded-3">
+				<div class="container-fluid py-5 jumbotron-text">
+					<h1 class="display-5 fw-bold">Welcome to DishCovery!</h1>
+					<p class="col-md-6 fs-4">
+						Are you tired of wondering what to cook for your next meal? Look
+						no further! DishCovery is here to help you discover delicious
+						recipes tailored to your preferences.
+					</p>
+					<a href="{{ url_for('register_route') }}">
+						<button class="btn btn-secondary btn-lg btn-jumbotron" type="button">
+							Sign-up now
+						</button>
+					</a>
+				</div>
+			</div>
+			<!-- START THE FEATURETTES -->
 
-            <hr class="featurette-divider" />
+			<hr class="featurette-divider" />
 
-            <div class="row featurette">
-                <div class="col-md-7 featurette-bg">
-                    <h2 class="featurette-heading">
-                        How It <span class="text-bold">Works</span>
-                    </h2>
-                    <ul>
-                        <li>
-                            <p class="lead">Get Personalized Recipes: Our intelligent algorithm will curate a list of
-                                mouthwatering recipes just for you, based on your input.</p>
-                        </li>
-                        <li>
-                            <p class="lead">Bookmark Your Favorites: Found a recipe you love? Save it to your bookmarks
-                                for easy access later!</p>
-                        </li>
-                        <li>
-                            <p class="lead">Download PDF Recipes: Want a hard copy of your favorite recipes? No problem!
-                                Download a beautifully formatted PDF version with just one click.
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                        height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#eee" />
-                        <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-                    </svg>
-                </div>
-            </div>
+			<div class="row featurette">
+				<div class="col-md-7 featurette-bg">
+					<h2 class="featurette-heading">
+						How It <span class="text-bold">Works</span>
+					</h2>
+					<ul>
+						<li>
+							<p class="lead">Get Personalized Recipes: Our intelligent algorithm will curate a list of
+								mouthwatering recipes just for you, based on your input.</p>
+						</li>
+						<li>
+							<p class="lead">Bookmark Your Favorites: Found a recipe you love? Save it to your bookmarks
+								for easy access later!</p>
+						</li>
+						<li>
+							<p class="lead">Download PDF Recipes: Want a hard copy of your favorite recipes? No problem!
+								Download a beautifully formatted PDF version with just one click.
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-5">
+					<svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+						height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
+						<title>Placeholder</title>
+						<rect width="100%" height="100%" fill="#eee" />
+						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+					</svg>
+				</div>
+			</div>
 
-            <hr class="featurette-divider" />
-            <div class="row featurette">
-                <div class="col-md-7 order-md-2 featurette-bg">
-                    <h2 class="featurette-heading">
-                        Why Choose DishCovery?
-                        <span class="text-muted">See for yourself.</span>
-                    </h2>
-                    <ul>
-                        <li>
-                            <p class="lead">
-                                Endless Variety: With a vast database of recipes spanning cuisines from around the
-                                world, you'll never run out of inspiration.
-                            </p>
-                        </li>
-                        <li>
-                            <p class="lead">
-                                Effortless Planning: Say goodbye to meal planning stress. DishCovery makes it simple to
-                                find recipes that match your taste and available ingredients.
-                            </p>
-                        </li>
-                        <li>
-                            <p class="lead">
-                                Save Time and Money: Reduce food waste and cut down on grocery expenses by making the
-                                most of what you already have in your pantry.
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-5 order-md-1">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                        height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#eee" />
-                        <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-                    </svg>
-                </div>
-            </div>
+			<hr class="featurette-divider" />
+			<div class="row featurette">
+				<div class="col-md-7 order-md-2 featurette-bg">
+					<h2 class="featurette-heading">
+						Why Choose DishCovery?
+						<span class="text-muted">See for yourself.</span>
+					</h2>
+					<ul>
+						<li>
+							<p class="lead">
+								Endless Variety: With a vast database of recipes spanning cuisines from around the
+								world, you'll never run out of inspiration.
+							</p>
+						</li>
+						<li>
+							<p class="lead">
+								Effortless Planning: Say goodbye to meal planning stress. DishCovery makes it simple to
+								find recipes that match your taste and available ingredients.
+							</p>
+						</li>
+						<li>
+							<p class="lead">
+								Save Time and Money: Reduce food waste and cut down on grocery expenses by making the
+								most of what you already have in your pantry.
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-5 order-md-1">
+					<svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+						height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
+						<title>Placeholder</title>
+						<rect width="100%" height="100%" fill="#eee" />
+						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+					</svg>
+				</div>
+			</div>
 
-            <hr class="featurette-divider" />
+			<hr class="featurette-divider" />
 
-            <div class="row featurette">
-                <div class="col-md-7 featurette-bg">
-                    <h2 class="featurette-heading">
-                        Start Cooking <span class="text-muted">Today!</span>
-                    </h2>
-                    <p class="lead">
-                        Sign up now to unlock the full potential of DishCovery and revolutionize your culinary
-                        experience.
-                    </p>
-                </div>
-                <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                        height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#eee" />
-                        <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-                    </svg>
-                </div>
-            </div>
+			<div class="row featurette">
+				<div class="col-md-7 featurette-bg">
+					<h2 class="featurette-heading">
+						Start Cooking <span class="text-muted">Today!</span>
+					</h2>
+					<p class="lead">
+						Sign up now to unlock the full potential of DishCovery and revolutionize your culinary
+						experience.
+					</p>
+				</div>
+				<div class="col-md-5">
+					<svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+						height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
+						<title>Placeholder</title>
+						<rect width="100%" height="100%" fill="#eee" />
+						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+					</svg>
+				</div>
+			</div>
 
-            <hr class="featurette-divider" />
+			<hr class="featurette-divider" />
 
-            <!-- /END THE FEATURETTES -->
-        </div>
-        </div>
-    </main>
+			<!-- /END THE FEATURETTES -->
+		</div>
+		</div>
+	</main>
 
-    <!-- FOOTER -->
-    <footer class="home_footer">
-        <p class="mt-5 mb-3 fs-5 font-weight-bold">&copy;DishCovery 2024</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+	<!-- FOOTER -->
+	<footer class="home_footer">
+		<p class="mt-5 mb-3 fs-5 font-weight-bold">&copy;DishCovery 2024</p>
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>

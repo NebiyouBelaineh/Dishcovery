@@ -64,6 +64,11 @@ def home_route():
     """ Serves the home page """
     return render_template('homepage.html')
 
+@app.route("/about", strict_slashes=False)
+def about_route():
+    """ Serves the about page """
+    return render_template('about.html')
+
 
 @app.route("/recipe_finder", strict_slashes=False)
 def recipe_finder():
