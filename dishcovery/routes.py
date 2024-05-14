@@ -430,10 +430,12 @@ def writeResponse(response):
     """Write the response from the api call to a JSON file"""
     file_path = 'dishcovery/static/data/tmp/response.json'
 
-    with open(file_path, 'w') as file:
-        file.write((json.dumps(response)))
-
-    print("JSON object saved to", file_path)
+    try:
+        with open(file_path, 'w') as file:
+            file.write((json.dumps(response)))
+            print("JSON object saved to", file_path)
+    except FileNotFoundError:
+        pass
 
 
 def delete_file():
