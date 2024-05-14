@@ -7,7 +7,9 @@ div main.recipe_finder {
 .recipe_finder_container {
   margin-top: 70px;
   margin-bottom: 70px;
+  padding: 50px 50px 0px 0px;
 }
+
 .par_container {
   background-color: #88ab8e;
   border-radius: 10px;
@@ -42,9 +44,6 @@ footer.inner_footer {
   background-clip: text;
   -webkit-background-clip: text;
 }
-.recipe_finder_container {
-  padding: 50px 50px 0px 0px;
-}
 div.selectedIngredients {
   display: inline;
   margin-right: 10px;
@@ -54,6 +53,25 @@ p.ingredientText {
 }
 .navbar-dark,
 .navbar-toggler {
-    color: rgba(255,255,255,1) !important;
-    border-color: rgba(255,255,255,1) !important
+  color: rgba(255, 255, 255, 1) !important;
+  border-color: rgba(255, 255, 255, 1) !important;
+}
+
+@media (max-width: 768px) {
+  .recipe_finder_container {
+    padding: 50px 0px 0px 0px;
+  }
+  main.recipe_finder {
+    padding: 0 5px 0 5px;
+  }
+  .main-logo h1 {
+    /* color: #689e3c; */
+    background-image: linear-gradient(to right, #4b4f4a, #449e3c);
+    font-size: 60px;
+
+  }
+  .par_container {
+    width: auto;
+    padding: 0 5px 0 5px;
+  }
 }
