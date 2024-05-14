@@ -106,7 +106,7 @@ def save_bookmark_route():
     image_link = bookmark_details.get("img")
     ingredients = bookmark_details.get("ingredients")
     calories = bookmark_details.get("calories")
-    total_time = bookmark_details.get("total_time")
+    total_time = bookmark_details.get("totalTime")
     link = bookmark_details.get("link")
     tags = bookmark_details.get("tags")
 
@@ -430,10 +430,12 @@ def writeResponse(response):
     """Write the response from the api call to a JSON file"""
     file_path = 'dishcovery/static/data/tmp/response.json'
 
-    with open(file_path, 'w') as file:
-        file.write((json.dumps(response)))
-
-    print("JSON object saved to", file_path)
+    try:
+        with open(file_path, 'w') as file:
+            file.write((json.dumps(response)))
+            print("JSON object saved to", file_path)
+    except FileNotFoundError:
+        pass
 
 
 def delete_file():

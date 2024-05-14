@@ -50,7 +50,7 @@ body {
 
 /* Modal */
 .modal-dialog {
-    max-width: 55% !important;
+    max-width: 60% !important;
 }
 .modal-content{
 	padding:40px;
@@ -262,4 +262,28 @@ button.btn.btn-primary.btn-book:hover {
 	.col-custom{
 		display:flex;
 	}
+    
+}
+@media (max-width: 1020px) {
+    .modal-dialog {
+        max-width: 70% !important;
+    }
+}
+@media (max-width: 813px) {
+    .modal-sections {
+        flex-direction: column;
+    }
+    .modal-content {
+        padding: 10px;
+    }
+    .modal-dialog {
+        margin: auto;
+    }
+    .main-logo h1{
+        font-size: 45px;
+        background-image: linear-gradient(to right, #4b4f4a, #449e3c);
+    }
+    .modal-dialog {
+        max-width: 80% !important;
+    }
 }

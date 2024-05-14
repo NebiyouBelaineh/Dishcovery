@@ -16,7 +16,7 @@
 			<!-- ---protect from cros forgery attacks--- -->
 			{{ form.hidden_tag() }}
 		  
-		  <h1 class="h3 mb-3 fw-normal">Please register</h1>
+		  <h1 class="h3 mb-3 fw-normal">Please Register</h1>
 	
 		  <div class="form-floating">
 			
@@ -44,7 +44,7 @@
 		  </div>
 	
 			<div class="form-floating" style="margin-top:10px">
-				<span>Do you have and account</span> <a href="{{ url_for('login_route') }}" class="btn btn-sm btn-secondary">Sign in</a>
+				<span>Already have an account? </span> <a href="{{ url_for('login_route') }}" class="btn btn-sm btn-secondary">Sign in</a>
 			  </div>
 		  {{ form.submit(class="w-100 btn btn-lg btn-secondary custom-register") }}
 		</form>

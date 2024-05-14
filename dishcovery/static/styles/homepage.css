@@ -1,17 +1,3 @@
-.bd-placeholder-img { 
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
 p.description {
   font-family: cursive;
 }
@@ -21,8 +7,21 @@ p.description {
   background-size: cover;
   background-position: center;
   animation: changeBackground 20s infinite;
-}
+  color: aliceblue;
+  margin-top: 80px;
 
+  /* border: 3px solid; */
+  /* box-shadow: inset 0px -1px 0px black; just to make the bottom border look thicker */
+  /* margin-bottom: 4px; */
+
+  /* border-radius: 0% 0% 150% 150%/0% 0% 40% 40%; */
+}
+.bg-one h1 {
+  padding-left: 15px;
+}
+.container-fluid.bg-one {
+  padding-left: 35px;
+}
 /* @keyframes changeBackground {
   0% { background-image: url('./images/tamanna-rumee-DoUgSMezLp0-unsplash_rotated.jpg'); }
   50% { background-image: url('../images/ikhsan-baihaqi-RwAXb8Hv_sU-unsplash_rotated.jpg'); }
@@ -33,7 +32,7 @@ p.description {
   width: auto;
 }
 h2 {
-  color: #135D66;
+  color: #135d66;
   padding: 5px;
 }
 .featurette-bg {
@@ -43,6 +42,38 @@ h2 {
 p.lead {
   font-size: x-large;
 }
+.btn-jumbotron {
+  margin: 0 0 20px 20px;
+}
 .btn-jumbotron:hover {
-  background-color: #135D66;
+  background-color: #135d66;
+}
+.featurette-bg-video {
+  background-color: #5f9ea06b;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 150%; /* Set the desired aspect ratio */
+  overflow: hidden;
+  text-align: center;
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .featurette-bg p {
+    font-size: large;
+  }
+  iframe {
+    width: 100%;
+  }
 }
