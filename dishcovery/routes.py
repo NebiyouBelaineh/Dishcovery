@@ -364,8 +364,6 @@ def search_route():
     recipe_query = "".join(ingredients_string + cuisine_string + meal_string +
                            dish_string)  # collects the recipe search params
 
-    # print("Recipe Details: ", recipe_query)
-
     # Keeps the recipeData list to hold only one recipe find query
     # and empties it if new query is made
     if len(recipeData) and recipe_query != "":
@@ -375,7 +373,7 @@ def search_route():
         # print(recipe_query)
         recipeData.append(recipe_query)
 
-    print("recipeData: ", recipeData[0])
+    # print("recipeData: ", recipeData[0])
     return redirect(url_for('result_route'))
 
 
@@ -417,10 +415,6 @@ app_id={api_id}&app_key={api_key}&q={recipeParam}"
         return None
     try:
         result = response.json()
-        # print(result)
-        # if len(recipeDetails):
-        #     recipeDetails.pop()
-        #     recipeDetails.append(result)
         return result
     except (KeyError, TypeError, ValueError):
         return None

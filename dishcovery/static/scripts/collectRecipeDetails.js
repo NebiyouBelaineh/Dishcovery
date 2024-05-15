@@ -30,9 +30,7 @@ $(function () {
       dishType: dishes
     };
 
-    console.log(formDataObject);
     const recipeJSON = JSON.stringify(formDataObject);
-    console.log(recipeJSON);
 
     fetch('/search', {
       method: 'POST',

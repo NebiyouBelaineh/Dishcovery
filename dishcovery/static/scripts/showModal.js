@@ -36,7 +36,7 @@ $(function () {
     console.log(recipeId);
 
     const recipeInfo = {
-      recipeId
+      recipeId: recipeId
     };
     const recipeJson = JSON.stringify(recipeInfo);
 
@@ -66,14 +66,14 @@ $(function () {
           const fullDetails = hit.url;
           const label = hit.label;
 
-          console.log('source: ', source);
-          console.log('ingredients: ', ingredients);
-          console.log('calories: ', calories);
-          console.log('totalTime: ', totalTime);
-          console.log('tags: ', tags);
-          console.log('img: ', img);
-          console.log('fullDetails: ', fullDetails);
-          console.log('label: ', label);
+          // console.log('source: ', source);
+          // console.log('ingredients: ', ingredients);
+          // console.log('calories: ', calories);
+          // console.log('totalTime: ', totalTime);
+          // console.log('tags: ', tags);
+          // console.log('img: ', img);
+          // console.log('fullDetails: ', fullDetails);
+          // console.log('label: ', label);
 
           // Save values to recipeContent dict
           recipeContent.source = source;
@@ -159,10 +159,10 @@ $(function () {
             })
             .catch((error) => {
               // Handle errors
-              console.log(
-                'There was a problem with the fetch operation:',
-                error
-              );
+              // console.log(
+                // 'There was a problem with the fetch operation:',
+                // error
+              // );
             });
         }
       })
