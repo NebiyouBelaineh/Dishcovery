@@ -7,7 +7,7 @@ from flask_login import LoginManager
 
 load_dotenv()
 """
-enable this after creating tables;
+disable this after creating tables;
 """
 # from dishcovery.models import db_storage
 # db_storage.reload()

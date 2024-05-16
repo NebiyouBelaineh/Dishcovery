@@ -317,7 +317,7 @@ Please try different email address", category='danger')
 
             current_user.password = new_password
             db_storage.save()
-            flash("Email address changed successfully!", category='success')
+            flash("Password changed successfully!", category='success')
             return render_template(
                 'settings.html',
                 message="message4",
