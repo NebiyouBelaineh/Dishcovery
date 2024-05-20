@@ -11,7 +11,8 @@ import signal
 import re
 
 
-@app.route("/login", strict_slashes=False, methods=['POST', 'GET'])
+@app.route("/dishcovery/login", strict_slashes=False, methods=['GET'])
+@app.route("/login", strict_slashes=False, methods=['POST'])
 def login_route():
     """Serves Login Page"""
     form = LoginForm()
@@ -34,7 +35,8 @@ def login_route():
     return render_template('login.html', form=form)
 
 
-@app.route("/register", strict_slashes=False, methods=["POST", "GET"])
+@app.route("/dishcovery/register", strict_slashes=False, methods=["GET"])
+@app.route("/register", strict_slashes=False, methods=["POST"])
 def register_route():
     """ Serves register page """
     # will deal with form
@@ -58,14 +60,14 @@ sign in to access the app", category="info")
     return render_template('register.html', form=form)
 
 
-@app.route("/home", strict_slashes=False)
-@app.route("/", strict_slashes=False)
+@app.route("/dishcovery/home", strict_slashes=False)
+@app.route("/dishcovery/", strict_slashes=False)
 def home_route():
     """ Serves the home page """
     return render_template('homepage.html')
 
 
-@app.route("/recipe_finder", strict_slashes=False)
+@app.route("/dishcovery/recipe_finder", strict_slashes=False)
 def recipe_finder():
     """ Serves the recipe finder page """
     cuisine_types = ['(Default) - Any', 'American', 'Asian', 'British',
@@ -84,7 +86,7 @@ def recipe_finder():
                            meals=meal_types, dishes=dish_types)
 
 
-@app.route("/bookmarks", strict_slashes=False)
+@app.route("/dishcovery/bookmarks", strict_slashes=False)
 @login_required
 def bookmark_route():
     """ Serves the bookmarks page """
@@ -96,7 +98,7 @@ def bookmark_route():
         return render_template('bookmarks_not_found.html')
 
 
-@app.route("/save_bookmark", strict_slashes=False, methods=['POST'])
+@app.route("/dishcovery/save_bookmark", strict_slashes=False, methods=['POST'])
 @login_required
 def save_bookmark_route():
     """Saves bookmark if it is not saved alread"""
@@ -136,7 +138,7 @@ def save_bookmark_route():
     return response
 
 
-@app.route("/get_bookmark", strict_slashes=False, methods=['POST'])
+@app.route("/dishcovery/get_bookmark", strict_slashes=False, methods=['POST'])
 @login_required
 def get_bookmark_route():
     """Returns bookmark from DB using its ID"""
@@ -152,7 +154,7 @@ def get_bookmark_route():
     return response
 
 
-@app.route("/get_recipe", strict_slashes=False, methods=['POST'])
+@app.route("/dishcovery/get_recipe", strict_slashes=False, methods=['POST'])
 def get_recipe_route():
     """Returns recipe from API call using its index"""
     recipe = request.get_json()
@@ -171,7 +173,7 @@ def get_recipe_route():
     return response
 
 
-@app.route("/check_bookmark", strict_slashes=False, methods=['POST'])
+@app.route("/dishcovery/check_bookmark", strict_slashes=False, methods=['POST'])
 @login_required
 def check_bookmark_route():
     """Checks if recipe is bookmarked from DB using its link"""
@@ -194,7 +196,7 @@ def check_bookmark_route():
     return response
 
 
-@app.route("/delete_bookmark", strict_slashes=False, methods=['POST'])
+@app.route("/dishcovery/delete_bookmark", strict_slashes=False, methods=['POST'])
 @login_required
 def delete_bookmark_route():
     """Deletes a bookmark from DB using its ID"""
@@ -213,7 +215,7 @@ def delete_bookmark_route():
     return response
 
 
-@app.route("/settings", strict_slashes=False, methods=["GET", "POST"])
+@app.route("/dishcovery/settings", strict_slashes=False, methods=["GET", "POST"])
 @login_required
 def settings_route():
     """ Serves the settings page """
@@ -332,7 +334,7 @@ Please try different email address", category='danger')
                            last_name=current_user.lastname.capitalize())
 
 
-@app.route("/logout", strict_slashes=False)
+@app.route("/dishcovery/logout", strict_slashes=False)
 @login_required
 def logout_route():
     """ Logs out user and serves login page """
@@ -341,7 +343,7 @@ def logout_route():
     return redirect(url_for('login_route'))
 
 
-@app.route("/search", strict_slashes=False, methods=['POST'])
+@app.route("/dishcovery/search", strict_slashes=False, methods=['POST'])
 def search_route():
     """ Search for recipe """
     ingredients = request.get_json()['ingredients']
@@ -377,7 +379,7 @@ def search_route():
     return redirect(url_for('result_route'))
 
 
-@app.route("/results", strict_slashes=False)
+@app.route("/dishcovery/results", strict_slashes=False)
 def result_route():
     """ Shows results for recipe """
     hits = []

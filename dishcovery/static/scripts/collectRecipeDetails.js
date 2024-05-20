@@ -32,7 +32,7 @@ $(function () {
 
     const recipeJSON = JSON.stringify(formDataObject);
 
-    fetch('/search', {
+    fetch('/dishcovery/search', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ $(function () {
           throw new Error('Network response was not ok');
         }
         // Redirect to the /results route after successful POST request
-        window.location.href = '/results';
+        window.location.href = '/dishcovery/results';
       })
       .catch((error) => {
         // Handle errors

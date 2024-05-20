@@ -39,7 +39,7 @@ $(function () {
     };
     const recipeJson = JSON.stringify(recipeInfo);
 
-    fetch('/get_bookmark', {
+    fetch('/dishcovery/get_bookmark', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ $(function () {
 
     const recipeJSON = JSON.stringify(bookmarkDetails);
     // Sends the recipe details to save them as bookmark
-    fetch('/save_bookmark', {
+    fetch('/dishcovery/save_bookmark', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -175,7 +175,7 @@ $(function () {
     const recipeJSON = JSON.stringify(recipeInfo);
 
     // Sends the recipe details to remove them as bookmark
-    fetch('/delete_bookmark', {
+    fetch('/dishcovery/delete_bookmark', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
