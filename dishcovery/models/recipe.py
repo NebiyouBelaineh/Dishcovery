@@ -13,12 +13,12 @@ class Recipe(BaseModel):
 
     # bookmark_id = Column(String(60), ForeignKey('bookmarks.id'),
     #                      nullable=False)
-    label = Column(String(60), nullable=True)
-    image_link = Column(String(60), nullable=True)
+    label = Column(Text(60), nullable=True)
+    image_link = Column(Text(60), nullable=True)
     ingredients = Column(Text, nullable=True)  # imported from a list
     preparation_time = Column(Integer, nullable=True, default=0)
     calorie_intake = Column(Float, nullable=True, default=0.0)
-    link = Column(String(60), nullable=True)
+    link = Column(Text(60), nullable=True)
     tags = Column(Text, nullable=True)
     cousine_type = Column(Text, nullable=True)
 

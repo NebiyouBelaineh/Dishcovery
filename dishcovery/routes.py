@@ -9,53 +9,68 @@ from flask_login import login_user, logout_user, login_required, current_user
 import json
 import signal
 import re
+from sqlalchemy.exc import SQLAlchemyError
 
 
 @app.route("/login", strict_slashes=False, methods=['POST', 'GET'])
 def login_route():
     """Serves Login Page"""
-    form = LoginForm()
-    if form.validate_on_submit():
-        attempted_user = db_storage.getSession().query(User).filter_by(
-            email=form.email_address.data).first()
-        if attempted_user and attempted_user.check_password(
-                attempted_password=form.password1.data):
-            login_user(attempted_user)
-            # flash(f'Success! You are logged in as:
-            # {attempted_user.full_name()}', category='success')
-            return redirect(url_for('recipe_finder'))
-        else:
-            flash('Username and password are not match! Please try again',
-                  category='danger')
-    if form.errors != {}:
-        print(form.errors)
-        for err_msg in form.errors.values():
-            flash(f'{err_msg}', category="danger")
-    return render_template('login.html', form=form)
+    try:  
+        form = LoginForm()
+        if form.validate_on_submit():
+            attempted_user = db_storage.getSession().query(User).filter_by(
+                email=form.email_address.data).first()
+            if attempted_user and attempted_user.check_password(
+                    attempted_password=form.password1.data):
+                login_user(attempted_user)
+                # flash(f'Success! You are logged in as:
+                # {attempted_user.full_name()}', category='success')
+                return redirect(url_for('recipe_finder'))
+            else:
+                flash('Username and password are not match! Please try again',
+                    category='danger')
+        if form.errors != {}:
+            print(form.errors)
+            for err_msg in form.errors.values():
+                flash(f'{err_msg}', category="danger")
+        return render_template('login.html', form=form)
+    except SQLAlchemyError as e:
+        db_storage.getSession().rollback()
+        print(f"Database error occurred: {e}")
+        return render_template('login.html')
+    finally:
+        db_storage.getSession().close()
 
 
 @app.route("/register", strict_slashes=False, methods=["POST", "GET"])
 def register_route():
     """ Serves register page """
     # will deal with form
-    form = RegisterForm()
-    if form.validate_on_submit():
-        user_to_create = User(firstname=form.first_name.data,
-                              lastname=form.last_name.data,
-                              email=form.email_address.data,
-                              password=form.password1.data
-                              )
-        db_storage.new(user_to_create)
-        db_storage.save()
-        flash(f"User {user_to_create.full_name()} created successfully! please\
-sign in to access the app", category="info")
-        # redirect the user to the specific route using redirect and url_for
-        return redirect(url_for('login_route'))
-    if form.errors != {}:
-        print(form.errors)
-        for err_msg in form.errors.values():
-            flash(f'{err_msg}', category="danger")
-    return render_template('register.html', form=form)
+    try:
+        form = RegisterForm()
+        if form.validate_on_submit():
+            user_to_create = User(firstname=form.first_name.data,
+                                lastname=form.last_name.data,
+                                email=form.email_address.data,
+                                password=form.password1.data
+                                )
+            db_storage.new(user_to_create)
+            db_storage.save()
+            flash(f"User {user_to_create.full_name()} created successfully! please\
+    sign in to access the app", category="info")
+            # redirect the user to the specific route using redirect and url_for
+            return redirect(url_for('login_route'))
+        if form.errors != {}:
+            print(form.errors)
+            for err_msg in form.errors.values():
+                flash(f'{err_msg}', category="danger")
+        return render_template('register.html', form=form)
+    except SQLAlchemyError as e:
+        db_storage.getSession().rollback()
+        print(f"Database error occurred: {e}")
+        return render_template('login.html')
+    finally:
+        db_storage.getSession().close()
 
 
 @app.route("/home", strict_slashes=False)
