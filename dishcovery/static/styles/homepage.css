@@ -2,7 +2,7 @@ p.description {
   font-family: cursive;
 }
 .bg-one {
-  background-image: url("../images/tamanna-rumee-DoUgSMezLp0-unsplash_rotated.jpg");
+  background-image: linear-gradient(#03191f, #1c8210b0);
   height: 500px;
   background-size: cover;
   background-position: center;
