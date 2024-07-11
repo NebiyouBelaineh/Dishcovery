@@ -55,7 +55,7 @@ The web app was hosted on a private server from ALX Africa and is currently not 
 <details>
   <summary>Server</summary>
   <ul>
-    <<li><a href="https://flask.palletsprojects.com/en/3.0.x/">FLASK</a></li>
+    <li><a href="https://flask.palletsprojects.com/en/3.0.x/">FLASK</a></li>
     <li><a href="https://www.python.org/">PYTHON</a></li>
     <li><a href="https://www.sqlalchemy.org/">SQLALCHEMY</a></li>
   </ul>
@@ -64,7 +64,7 @@ The web app was hosted on a private server from ALX Africa and is currently not 
 <details>
 <summary>Database</summary>
   <ul>
-    <li><a href="https://https://www.mysql.com/">PostgreSQL</a></li>
+    <li><a href="https://https://www.mysql.com/">MySQL</a></li>
   </ul>
 </details>
 
