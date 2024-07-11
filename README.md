@@ -21,6 +21,11 @@
 
 
 ## :star2: About the Project
+This web application allows users to search for recipes based on their existing ingredients or desired cuisine, meal type, and more. By leveraging the Edamame Recipe API, the application provides a vast database of recipes to suit any preference. With features like user accounts and recipe bookmarking, this recipe finder is the perfect companion for home cooks of all levels.
+
+This recipe finder application is a web-based solution built with a combination of front-end and back-end technologies. The front-end utilizes HTML5 for structure and content, CSS3 for styling, and Javascript with jQuery to deliver an interactive user experience. On the back-end, Flask, a Python web framework, handles server-side logic and API calls. The application leverages the Edamame Recipe API to access a vast recipe database.
+
+The web app was hosted on a private server from ALX Africa and is currently not maintained and is down. However, we plan to host the application again and add some improvements!
 
 ### :camera: Screenshots
 <div align="center"> <a href="http://35.175.65.10/"><img src="https://i.imgur.com/S6Pgf5f.png" alt='image' width='800'/></a> </div>
@@ -136,7 +141,7 @@ python3 app.py
 
 Contributions are always welcome!
 
-see `contributing.md` for ways to get started
+Email: [Nebiyou](nebiyouseifu2@gmail.com) or [Chaith](dridi.seth31@gmail.com)  for ways to get started.
 
 ## :grey_question: FAQ
 
@@ -146,7 +151,7 @@ see `contributing.md` for ways to get started
 
 ## :handshake: Contact
 
-Nebiyou Belaine - [@twitter_handle](https://twitter.com/SeifuNebiyou) - nebiyouseifu2@gmail.com
+Nebiyou Belaineh - [@twitter_handle](https://twitter.com/SeifuNebiyou) - nebiyouseifu2@gmail.com
 
 Project Link: [https://github.com/NebiyouBelaineh/Dishcovery](https://github.com/NebiyouBelaineh/Dishcovery)
 
