@@ -4,6 +4,7 @@ from os import environ
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+import os
 
 load_dotenv()
 """
@@ -14,7 +15,8 @@ disable this after creating tables;
 
 app = Flask(__name__)
 # is a security shield for displaying the form
-app.config["SECRET_KEY"] = environ.get("DISHCOVERY_SECRET_KEY")
+default_secret_key = os.urandom(24)
+app.config["SECRET_KEY"] = environ.get("DISHCOVERY_SECRET_KEY", default_secret_key)
 # an empty list to hold recipe find queries
 recipeData = []
 # an empty list to hold recipe api response
