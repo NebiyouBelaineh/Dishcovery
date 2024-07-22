@@ -63,7 +63,7 @@
 						<a class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %}"
 							href="{{ url_for('recipe_finder') }}" style="color:#fff !important;">Recipe Finder</a>
 					</li>
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-item nav-link {% if request.path == url_for('bookmark_route') %}active{% endif %}"
 							href="{{ url_for('bookmark_route') }}" style="color:#fff !important;">Bookmarks</a>
 					</li>
@@ -74,7 +74,7 @@
 					<li class="nav-item">
 						<a class="nav-item nav-link {% if request.path == url_for('logout_route') %}active{% endif %}"
 							href="{{ url_for('logout_route') }}" style="color:#fff !important;">Logout</a>
-					</li>
+					</li> -->
 					{% else %}
 					<li class="nav-item">
 						<a class="nav-item nav-link {% if request.path == url_for('home_route') %}active{% endif %}"
@@ -84,14 +84,14 @@
 						<a class="nav-item nav-link {% if request.path == url_for('recipe_finder') %}active{% endif %}"
 							href="{{ url_for('recipe_finder') }}" style="color:#fff !important;">Recipe Finder</a>
 					</li>
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-item nav-link {% if request.path == url_for('login_route') %}active{% endif %}"
 							href="{{ url_for('login_route') }}" style="color:#fff !important;">Login</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-item nav-link {% if request.path == url_for('register_route') %}active{% endif %}"
 							href="{{ url_for('register_route') }}" style="color:#fff !important;">Register</a>
-					</li>
+					</li> -->
 					{% endif %}
 					<!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
 				</ul>
