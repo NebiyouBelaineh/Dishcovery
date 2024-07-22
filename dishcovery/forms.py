@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, \
     DataRequired, ValidationError
 from dishcovery.models import User
-from dishcovery.models import db_storage
+# from dishcovery.models import db_storage
 
 
 class RegisterForm(FlaskForm):
