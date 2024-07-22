@@ -163,3 +163,4 @@ package-lock.json
 package.json
 dishcovery/static/data/tmp/
 .vercel
+dishcovery_vercel/
