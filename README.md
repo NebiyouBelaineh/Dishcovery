@@ -87,9 +87,9 @@ The web app was hosted on a private server from ALX Africa and is currently not 
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-Currently, the server we had from ALX_SE is down but we intend to host it again on another platform.
+The app is deployed [here](https://dishcovery-six.vercel.app/) with no login features and user data storage on Vercel. The user data storage will be added soon, with some UI improvements and pagination added to provide more recipe results.
 
-- You can see the video demo [here](https://www.youtube.com/watch?v=1abO6UxFAn4&ab_channel=NebiyouSeifu).
+- You can see the full feature video demo [here](https://www.youtube.com/watch?v=1abO6UxFAn4&ab_channel=NebiyouSeifu).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
