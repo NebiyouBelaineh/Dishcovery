@@ -1,11 +1,13 @@
 {% extends 'base_2.html' %} {% block script %}
 
-<script src="../static/scripts/addIngridents.js" defer></script>
+<script src="../static/scripts/addIngridents.js"></script>
 <script src="../static/scripts/makeSuggestion.js" defer></script>
 <script src="../static/scripts/collectRecipeDetails.js" defer></script>
 {% endblock %} {% block title %} Recipe Finder {% endblock %} {% block styles%}
 <!-- <link rel="stylesheet" href="../static/styles/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="../static/styles/recipe_finder.css" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 {% endblock%} {% block main %}
 
@@ -15,11 +17,14 @@
       <h1>DishCovery</h1>
     </div>
     <div class="">
-		{% if current_user.is_authenticated %}
-      <h3>Hello <span class="badge bg-warning">{{ current_user.full_name() }}</span></h3>
-	  {% else %}
-	  <h3>Hello <span class="badge bg-warning">Dear Visitor</span></h3>
-	  {% endif %}
+      {% if current_user.is_authenticated %}
+      <h3>
+        Hello
+        <span class="badge bg-warning">{{ current_user.full_name() }}</span>
+      </h3>
+      {% else %}
+      <h3>Hello <span class="badge bg-warning">Dear Visitor</span></h3>
+      {% endif %}
       <p class="lead">
         Type in or choose the ingredients and meal details you would like to
         have for your next dish.
@@ -112,7 +117,7 @@
       id="sumbitRecipeButton"
       class="btn btn-secondary btn-lg shadow"
       type="submit"
-      >
+    >
       Find Recipe
     </button>
   </div>
