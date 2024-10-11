@@ -1,24 +1,27 @@
 {% extends 'base_2.html' %} {% block title %} Bookmarks {% endblock %} {%
 block styles%}
-<link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="../static/styles/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="../static/styles/bookmarks.css" />
 
 {% endblock%} {% block script %}
 <script
   type="module"
   src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+  async
 ></script>
 <script
   nomodule
   src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+  async
 ></script>
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
   crossorigin="anonymous"
+  async
 ></script>
-<script src="../static/scripts/showModalBookmark.js"></script>
-<script src="../static/scripts/printThis.js"></script>
+<script src="../static/scripts/showModalBookmark.js" async></script>
+<script src="../static/scripts/printThis.js" defer></script>
 {% endblock %} {% block main %}
 
 <!-- ----------------Modal-------------------	 -->
