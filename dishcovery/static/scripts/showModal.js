@@ -54,7 +54,7 @@ $(function () {
         return response.json();
       })
       .then((hit) => {
-        if (hit === {}) {
+        if (hit == {}) {
           console.log('Recipe Details is empty');
         } else {
           const source = hit.source;
