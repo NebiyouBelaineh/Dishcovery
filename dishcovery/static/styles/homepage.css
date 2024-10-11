@@ -70,7 +70,7 @@ p.description {
 
 .img-hero {
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 /* @keyframes changeBackground {
@@ -103,10 +103,15 @@ p.lead {
 
 .btn-jumbotron {
   margin: 0 0 20px 20px;
+  font-size: large;  
+  text-align: left;
 }
-
+.btn-link {
+  text-decoration: none;
+}
 .btn-jumbotron:hover {
   background-color: #135d66;
+  text-decoration: none;
 }
 
 .featurette-bg-video {
@@ -154,6 +159,9 @@ p.lead {
 
   .second-item {
     order: 1;
+  }
+  .btn-jumbotron {
+    margin: 0 0 20px 0;
   }
 
 }
