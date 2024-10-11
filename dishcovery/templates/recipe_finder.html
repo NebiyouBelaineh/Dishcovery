@@ -1,15 +1,15 @@
 {% extends 'base_2.html' %} {% block script %}
 
-<script src="../static/scripts/addIngridents.js"></script>
-<script src="../static/scripts/makeSuggestion.js"></script>
-<script src="../static/scripts/collectRecipeDetails.js"></script>
+<script src="../static/scripts/addIngridents.js" defer></script>
+<script src="../static/scripts/makeSuggestion.js" defer></script>
+<script src="../static/scripts/collectRecipeDetails.js" defer></script>
 {% endblock %} {% block title %} Recipe Finder {% endblock %} {% block styles%}
-<link rel="stylesheet" href="../static/styles/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="../static/styles/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="../static/styles/recipe_finder.css" />
 
 {% endblock%} {% block main %}
 
-<div class="container-sm recipe_finder_container">
+<div class="container-fluid recipe_finder_container">
   <main class="recipe_finder">
     <div class="main-logo">
       <h1>DishCovery</h1>
