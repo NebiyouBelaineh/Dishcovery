@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, \
     DataRequired, ValidationError
-from dishcovery.models import User
+from dishcovery.models.user import User
 from dishcovery.models import db_storage
 
 

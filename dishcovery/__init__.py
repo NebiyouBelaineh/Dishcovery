@@ -10,8 +10,8 @@ load_dotenv()
 """
 disable this after creating tables;
 """
-# from dishcovery.models import db_storage
-# db_storage.reload()
+from dishcovery.models import db_storage
+db_storage.reload()
 
 app = Flask(__name__)
 # is a security shield for displaying the form
