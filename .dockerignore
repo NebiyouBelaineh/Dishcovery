@@ -1,0 +1,9 @@
+.vercel
+dishcovery_vercel
+venv
+*.md
+LICENSE
+runtime.txt
+vercel.json
+.env
+.gitignore
