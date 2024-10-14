@@ -3,7 +3,8 @@ from dishcovery import app, recipeData, recipeDetails
 import requests
 import os
 from dishcovery.forms import RegisterForm, LoginForm
-from dishcovery.models import User, Bookmark
+from dishcovery.models.user import User
+from dishcovery.models.bookmark import Bookmark
 from dishcovery.models import db_storage
 from flask_login import login_user, logout_user, login_required, current_user
 import json
