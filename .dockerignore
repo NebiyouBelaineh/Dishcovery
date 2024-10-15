@@ -7,3 +7,4 @@ runtime.txt
 vercel.json
 .env
 .gitignore
+docker.env
