@@ -23,8 +23,7 @@ class DBStorage:
         """Instantiate a DBStorage object"""
         DISHCOVERY_MYSQL_USER = environ.get('DISHCOVERY_MYSQL_USER')
         DISHCOVERY_MYSQL_PWD = environ.get('DISHCOVERY_MYSQL_PWD')
-        DISHCOVERY_MYSQL_HOST = environ.get('DISHCOVERY_MYSQL_HOST',
-                                            'dishcovery-mysql')
+        DISHCOVERY_MYSQL_HOST = environ.get('DISHCOVERY_MYSQL_HOST')
         DISHCOVERY_MYSQL_DB = environ.get('DISHCOVERY_MYSQL_DB')
         DISHCOVERY_ENV = environ.get('DISHCOVERY_ENV')
         # Create engine without database
