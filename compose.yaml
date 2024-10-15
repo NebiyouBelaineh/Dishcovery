@@ -1,0 +1,33 @@
+# Each block under services will be using a separate container
+services:
+  dishcovery-db:
+    image: mysql:8.0
+    container_name: dishcovery-db
+    volumes:
+      - dishcovery-volume:/var/lib/mysql # Persists the data inside the db
+      - ./mysql-init-scripts:/docker-entrypoint-initdb.d # Initalize the db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_pwd
+    networks:
+      - dish-app-network
+
+  dishcovery-app:
+    build:
+      context: .
+    container_name: dishcovery-app
+    ports:
+      - 5050:5000
+    restart: always
+    networks:
+      - dish-app-network
+    env_file:
+      - ./docker.env
+    depends_on:
+      - dishcovery-db
+
+networks:
+  dish-app-network:
+    driver: bridge
+
+volumes:
+  dishcovery-volume:
