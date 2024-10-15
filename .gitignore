@@ -162,3 +162,7 @@ node_modules/
 package-lock.json
 package.json
 dishcovery/static/data/tmp/
+
+# Docker files
+.dockerignore
+docker.env
